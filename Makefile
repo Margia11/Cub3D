@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amargiac <amargiac@student.42.fr>          +#+  +:+       +#+         #
+#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/12 15:58:41 by amargiac         ###   ########.fr        #
+#    Updated: 2023/09/13 16:09:39 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 MAKEFLAGS += --silent
 
-SRC = ./get_next_line/get_next_line.c \
-	./get_next_line/get_next_line_utils.c \
+SRC = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
+		controls1.c controls2.c parser.c utils.c cube.c \
 
 OBJ = ${SRC:.c=.o}
 CC = gcc
