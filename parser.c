@@ -6,12 +6,13 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/13 16:15:05 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/15 14:23:05 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
+//
 void read_input(t_cube *cube)
 {
 	int		fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amargiac <amargiac@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:23:17 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/12 18:24:58 by amargiac         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:26:03 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ char	*rev_string(char *s)
 	}
 	return (d);
 }
-
 

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:55:55 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/13 16:18:54 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/14 17:58:42 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int checkbordes_top_down(char **map)
 	y = -1;
 	while(map[x][++y] != '\0')
 	{
-		if(map[x][y] != '1' || map[x][y] != ' ')
+		if(map[x][y] != '1' && map[x][y] != ' ')
 			return(-1);
 	}
 	while(map[k][++y] != '\0')
 	{
-		if(map[k][y] != '1' || map[k][y] != ' ')
+		if(map[k][y] != '1' && map[k][y] != ' ')
 			return(-1);
 	}
 	return(0);
@@ -53,18 +53,20 @@ int checkbordes_top_down(char **map)
 
 int checkbordes_left_right(char **map)
 {
-	int		x;
-	char	*strrev;
+	int	x;
+	int	y;
 
-	x = -1;
-	while(map[++x] != NULL)
+	x = 0;
+	y = 0;
+	while(map[x] != NULL)
 	{
-		strrev = rev_string(map[x]);
-		if(ft_strchr(map[x], '0') < ft_strchr(map[x], '1'))
+		if(map[x][y] != '1' && map[x][y] != ' ')
 			return(-1);
-		if(ft_strchr(strrev, '0') < ft_strchr(strrev, '1'))
+		while(map[x][y] != '\0')
+			y++;
+		if(map[x][y] != '1' && map[x][y] != ' ')
 			return(-1);
-		free(strrev);
+		x++;
 	}
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/13 15:07:33 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/14 17:43:49 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,5 @@ int check_argc(int argc)
 {
 	if(argc != 2)
 		return (-1);
-	
 	return (0);
 }
-
-
