@@ -6,13 +6,12 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/15 14:23:05 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/18 10:46:15 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-//
 void read_input(t_cube *cube)
 {
 	int		fd;
@@ -45,8 +44,8 @@ void init_player(t_cube *cube)
 			if(cube->map[x][y] == 'N' || cube->map[x][y] == 'S'
 				|| cube->map[x][y] == 'E' || cube->map[x][y] == 'W')
 			{
-				cube->player.x = x;
-				cube->player.y = y;
+				cube->player.pos_x = x;
+				cube->player.pos_y = y;
 				cube->player.dir = cube->map[x][y];
 				cube->map[x][y] = '0';
 			}
@@ -57,15 +56,25 @@ void init_player(t_cube *cube)
 void init_cube(t_cube *cube)
 {
 	cube->map = malloc(sizeof(char *) * 100);
-	cube->player.x = 0;
-	cube->player.y = 0;
+	cube->player.pos_x = 0;
+	cube->player.pos_y = 0;
 	cube->player.dir = '0';
 }
 
-// void game_init(t_cube *cube)
-// {
-// 	cube->mlx = mlx_init();
-// 	cube->win = mlx_new_window(cube->mlx, 640, 480, "Cub3d");
-// }
+void print_map(t_cube *cube)
+{
+	int	x;
 
+	x = -1;
+	while(cube->map[++x] != NULL)
+	{
+		printf("%s\n", cube->map[x]);
+	}
+}
+
+void game_init(t_cube *cube)
+{
+	cube->mlx = mlx_init();
+	cube->win = mlx_new_window(cube->mlx, 640, 480, "Cub3d");
+}
 

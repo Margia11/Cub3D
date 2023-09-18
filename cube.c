@@ -6,11 +6,17 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/15 14:15:20 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/18 10:09:32 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+
+int end_game(t_cube *cube)
+{
+	free_mat(cube->map);
+	exit(0);
+}
 
 int main(int argc, char **argv)
 {
@@ -22,6 +28,7 @@ int main(int argc, char **argv)
 		return (-1);
 	if(map_format(argv[1]) == -1)
 		return (-1);
+	print_map(&cube);
 	read_input(&cube);
 	//game_init(&cube);
 	if(checkelements(&cube) == -1)

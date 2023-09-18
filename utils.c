@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:23:17 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/15 12:26:03 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/18 10:07:58 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,15 @@ char	*rev_string(char *s)
 		k++;
 	}
 	return (d);
+}
+
+void	free_mat(char **mat)
+{
+	int	i;
+
+	i = 0;
+	while (mat[i] != NULL)
+		free(mat[i++]);
+	free(mat);
 }
 
