@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/20 11:54:11 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/20 16:41:21 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_textures(t_cube *textures)
 	if(!textures->no || !textures->so || !textures->we || !textures->ea
 		|| !textures->F || !textures->C)
 		printf("Error Missing texture\n");
+	return (0);
 }
 
 int check_argc(int argc)

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/20 16:11:51 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/20 17:34:33 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_cube
 {
 	void		*mlx;
 	void		*mlx_win;
+	void		*win;
 	char 		**map;
 	t_player	player;
 	t_ray		ray;
@@ -71,8 +72,6 @@ typedef struct s_cube
 	int			R[2]; //color
 	int			map_width;
 	int			map_height;
-	void		*mlx;
-	void		*win;
 }	t_cube;
 
 //utils.c
@@ -99,7 +98,7 @@ int		parse_map(t_cube *textures, char **line, int fd);
 
 
 //init.c
-//void	game_init(t_cube *cube);
+void	game_init(t_cube *cube);
 void	init_cube(t_cube *cube);
 void	init_player(t_cube *cube);
 

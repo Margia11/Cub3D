@@ -6,47 +6,62 @@
 #    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/20 15:39:03 by andreamargi      ###   ########.fr        #
+#    Updated: 2023/09/20 17:31:49 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Cube3D
+MINILIBX_PATH	=	./mlx
+MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
+LIBFT_PATH		=	./libft
+LIBFT			=	$(LIBFT_PATH)/libft.a
 
-LIBFT_PATH = libft
+SOURCES_FILES	=	cube.c\
+					controls1.c\
+					controls2.c\
+					init.c\
+					utils.c \
+					parser.c \
+					get_next_line/get_next_line.c\
+					get_next_line/get_next_line_utils.c\
 
-GNL = Get_next_line
-LIBFT = $(LIBFT_PATH)/libft.a
+HEADER			=	./Cub3d.h
 
-MAKEFLAGS += --silent
+OBJECTS			= 	$(SOURCES_FILES:.c=.o)
 
-SRC = ./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
-		controls1.c controls2.c parser.c utils.c cube.c init.c raytracing.c\
+NAME			=	Cub3d
 
-OBJ = ${SRC:.c=.o}
-CC = gcc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -Iheaders
-LIBRARY = -Lmlx_linux -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-MINILIBX = ./mlx_linux
+CC				=	gcc
+
+RM				=	rm -f
+
+MLX				=	./libmlx.dylib
+
+CFLAGS			=	-Wall -Wextra -Werror
+
+MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 
 %.o: %.c
-		${CC} ${CFLAGS} -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) ${CFLAGS} -Imlx -c $< -o $@
 
-${NAME}: ${OBJ}
-		make -C ${LIBFT_PATH}
-		make -C ${MINILIBX}
-		${CC} ${OBJ} ${LIBFT} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME}
+all:			$(NAME)
 
-all:
-		make -C ${LIBFT_PATH}
-		make -C ${MINILIBX}
-		${CC} ${CFLAGS} ${SRC} ${LIBFT} -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME}
+$(NAME):	$(OBJECTS) $(LIBFT)
+				$(CC) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+
+$(MINILIBX):
+				make -C $(MINILIBX_PATH)
+
+$(LIBFT):
+				make -C $(LIBFT_PATH)
 
 clean:
-		${RM} ${OBJ}
+				${RM} ${OBJECTS}
+				make clean -C ${LIBFT_PATH}
 
-fclean: clean
-		make clean -C ${MINILIBX}
-		${RM} ${NAME}
+fclean:			clean
+					rm -f $(NAME)
+					rm -f $(LIBFT)
 
-re: fclean all
+re:				fclean all
+
+.PHONY:			all clean re
