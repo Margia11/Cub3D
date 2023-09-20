@@ -6,75 +6,68 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/18 10:46:15 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/20 15:38:02 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-void read_input(t_cube *cube)
+void read_input(t_cube *textures, char **line, int fd)
 {
-	int		fd;
-	char	*line;
-	int		i;
-
-	i = 0;
-	fd = open("map.cub", O_RDONLY);
-	while(get_next_line(fd))
+	*line = get_next_line(fd);
+	while(*line)
 	{
-		cube->map[i] = ft_strdup(line);
-		free(line);
-		i++;
-	}
-	cube->map[i] = NULL;
-	close(fd);
-}
-
-void init_player(t_cube *cube)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while(cube->map[++x] != NULL)
-	{
-		y = -1;
-		while(cube->map[x][++y] != '\0')
+		if(!strncmp(line, "\n", 1))
 		{
-			if(cube->map[x][y] == 'N' || cube->map[x][y] == 'S'
-				|| cube->map[x][y] == 'E' || cube->map[x][y] == 'W')
-			{
-				cube->player.pos_x = x;
-				cube->player.pos_y = y;
-				cube->player.dir = cube->map[x][y];
-				cube->map[x][y] = '0';
-			}
+			gnl(line, fd);
+			continue;
 		}
+		if(!parse_texture(*line, textures))
+			return (-1);
+		if(textures->no && textures->so && textures->we && textures->ea
+			&& textures->F && textures->C)
+			break;
+		free(*line);
+		*line = get_next_line(fd);
 	}
+	check_textures(textures);
+	if(!parse_map(*line, textures, fd))
+	 	return (0);
+	return (1);
 }
 
-void init_cube(t_cube *cube)
+int parse_texture(char *line, t_cube *textures)
 {
-	cube->map = malloc(sizeof(char *) * 100);
-	cube->player.pos_x = 0;
-	cube->player.pos_y = 0;
-	cube->player.dir = '0';
+	if(!strncmp(line, "NO", 2))
+		textures->no = ft_strtrim(line + 3, " \n");
+	else if(!strncmp(line, "SO", 2))
+		textures->so = ft_strtrim(line + 3, " \n");
+	else if(!strncmp(line, "WE", 2))
+		textures->we = ft_strtrim(line + 3, " \n");
+	else if(!strncmp(line, "EA", 2))
+		textures->ea = ft_strtrim(line + 3, " \n");
+	else if(!strncmp(line, "F", 1))
+		textures->F = ft_strtrim(line + 2, " \n");
+	else if(!strncmp(line, "C", 1))
+		textures->C = ft_strtrim(line + 2, " \n");
+	else
+		printf("Error Wrong texture\n");
+	return (0);
 }
 
-void print_map(t_cube *cube)
+int	parse_map(char **line, t_cube *textures, int fd)
 {
-	int	x;
+	int		i;
+	char	**buff;
+	int		map_size;
 
-	x = -1;
-	while(cube->map[++x] != NULL)
-	{
-		printf("%s\n", cube->map[x]);
-	}
+	buff = malloc(sizeof(char *) * (map_size + 1));
+	i = 0;
+	gnl(fd, line);
+	while(*line && (*line)[0] == "\n")
+		*line++;
+	while(*line)
+		buff[i++] = ft_strdup(*line++);
+	textures->map = ft_split(buff, "\n");
+	free(buff);
 }
-
-void game_init(t_cube *cube)
-{
-	cube->mlx = mlx_init();
-	cube->win = mlx_new_window(cube->mlx, 640, 480, "Cub3d");
-}
-

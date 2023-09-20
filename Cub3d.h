@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/18 11:18:53 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/20 16:11:51 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <math.h>
 #include <stdlib.h>
-//#include "mlx_linux/mlx.h"
+#include "mlx/mlx.h"
 #include <stdio.h>
 
 typedef struct s_player
@@ -62,12 +62,12 @@ typedef struct s_cube
 	char 		**map;
 	t_player	player;
 	t_ray		ray;
-	char 		NO;
-	char		SO;
-	char		WE;
-	char		EA;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
 	char		F; //floor
-	char		C; //ceiling
+	char		C; //ceiling soffitto
 	int			R[2]; //color
 	int			map_width;
 	int			map_height;
@@ -75,33 +75,38 @@ typedef struct s_cube
 	void		*win;
 }	t_cube;
 
-
-//utils
+//utils.c
 int		ft_strcmp(char *s1, char *s2);
 char	*rev_string(char *s);
+void	gnl(char *line, int fd);
+void	free_mat(char **mat);
 
-//controls1
+//controls1.c
 int		map_format(char *argv);
 int		checkbordes_top_down(char **map);
 int		checkbordes_left_right(char **map);
 int		checkbordes_mid(t_cube *cube);
 
-//controls2
+//controls2.c
 int		checkelements(t_cube *cube);
+int		check_textures(t_cube *textures);
 int		check_argc(int argc);
 
-//parser
-void	init_player(t_cube *cube);
-void	read_input(t_cube *cube);
+//parser.c
+void	read_input(t_cube *textures, char **line, int fd);
+int		parse_texture(char *line, t_cube *textures);
+int		parse_map(t_cube *textures, char **line, int fd);
 
+
+//init.c
 //void	game_init(t_cube *cube);
 void	init_cube(t_cube *cube);
-void	print_map(t_cube *cube);
+void	init_player(t_cube *cube);
 
-//cube
+//cube.c
 int		end_game(t_cube *cube);
 
-//raycasting
+//raycasting.c
 void	init_ray(t_ray *ray, t_player *player, int x);
 void	dda(t_ray *ray, t_cube *cube);
 void	calc_line_height(t_ray *ray, t_cube *cube);

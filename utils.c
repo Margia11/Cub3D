@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 18:23:17 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/18 10:07:58 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/20 15:20:37 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,11 @@ void	free_mat(char **mat)
 	while (mat[i] != NULL)
 		free(mat[i++]);
 	free(mat);
+}
+
+void gnl(char *line, int fd)
+{
+	free(*line);
+	*line = get_next_line(fd);
 }
 
