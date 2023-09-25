@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
+#    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/20 17:31:49 by andreamargi      ###   ########.fr        #
+#    Updated: 2023/09/25 12:11:47 by gpecci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,15 @@ SOURCES_FILES	=	cube.c\
 					controls2.c\
 					init.c\
 					utils.c \
-					parser.c \
 					get_next_line/get_next_line.c\
 					get_next_line/get_next_line_utils.c\
+					#parser.c \
 
 HEADER			=	./Cub3d.h
 
 OBJECTS			= 	$(SOURCES_FILES:.c=.o)
 
-NAME			=	Cub3d
+NAME			=	cub3d
 
 CC				=	gcc
 

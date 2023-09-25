@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/20 17:34:33 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/25 12:45:08 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include "mlx/mlx.h"
 #include <stdio.h>
+#include <fcntl.h>
+#include <limits.h>
 
 typedef struct s_player
 {
@@ -61,14 +63,15 @@ typedef struct s_cube
 	void		*mlx_win;
 	void		*win;
 	char 		**map;
+	char		**tmp_map;
 	t_player	player;
 	t_ray		ray;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	char		F; //floor
-	char		C; //ceiling soffitto
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+	char		*F; //floor
+	char		*C; //ceiling soffitto
 	int			R[2]; //color
 	int			map_width;
 	int			map_height;
@@ -85,6 +88,7 @@ int		map_format(char *argv);
 int		checkbordes_top_down(char **map);
 int		checkbordes_left_right(char **map);
 int		checkbordes_mid(t_cube *cube);
+void	mapchecks(t_cube *cube);
 
 //controls2.c
 int		checkelements(t_cube *cube);

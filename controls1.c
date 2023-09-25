@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   controls1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:55:55 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/20 16:14:40 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/25 12:33:12 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
-int map_format(char *argv)
-{
-	int	i;
-
-	i = 0;
-	if(!argv)
-		return (0);
-	while(argv[i] != '\0')
-		i++;
-	if(argv[i - 3] != 'c' && argv[i - 2] != 'u' && argv[i - 1] != 'b'
-		&& argv[i - 4] != '.')
-		return (-1);
-	return (0);
-}
 
 int checkbordes_top_down(char **map)
 {

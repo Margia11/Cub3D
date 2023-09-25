@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/20 16:41:21 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/25 12:47:37 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,10 @@ int	checkelements(t_cube *cube)
 }
 int	check_textures(t_cube *textures)
 {
-	if(!textures->no || !textures->so || !textures->we || !textures->ea
+	if(!textures->NO || !textures->SO || !textures->WE || !textures->EA
 		|| !textures->F || !textures->C)
 		printf("Error Missing texture\n");
 	return (0);
 }
 
-int check_argc(int argc)
-{
-	if(argc != 2)
-		printf("Error Wrong number of arguments\n");
-	return (0);
-}
+
