@@ -6,69 +6,93 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/20 17:32:51 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/27 13:31:24 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-void read_input(t_cube *textures, char **line, int fd)
+void	read_map(char *str, t_cube *cube)
 {
-	*line = get_next_line(fd);
-	while(*line)
-	{
-		if(!ft_strncmp(*line, "\n", 1))
-		{
-			gnl(*line, fd);
-			continue;
-		}
-		if(!parse_texture(*line, textures))
-			return ;
-		if(textures->no && textures->so && textures->we && textures->ea
-			&& textures->F && textures->C)
-			break;
-		free(*line);
-		*line = get_next_line(fd);
-	}
-	check_textures(textures);
-	if(!parse_map(textures, line, fd))
-	 	return ;
+	int		fd;
+	char	*buff;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		return ;
+	buff = malloc(sizeof(char) * INT_MAX);
+	read(fd, buff, INT_MAX);
+	cube->tmp_map = ft_split(buff, '\n');
+	free(buff);
+	close(fd);
 	return ;
 }
 
-int parse_texture(char *line, t_cube *textures)
+void	parse_texture(char *line, t_cube *cube)
 {
-	if(!ft_strncmp(line, "NO", 2))
-		textures->no = ft_strtrim(line + 3, " \n");
-	else if(!ft_strncmp(line, "SO", 2))
-		textures->so = ft_strtrim(line + 3, " \n");
-	else if(!ft_strncmp(line, "WE", 2))
-		textures->we = ft_strtrim(line + 3, " \n");
-	else if(!ft_strncmp(line, "EA", 2))
-		textures->ea = ft_strtrim(line + 3, " \n");
-	else if(!ft_strncmp(line, "F", 1))
-		textures->F = *ft_strtrim(line + 2, " \n");
-	else if(!ft_strncmp(line, "C", 1))
-		textures->C = *ft_strtrim(line + 2, " \n");
-	else
-		printf("Error Wrong texture\n");
-	return (0);
+	if(ft_strncmp(line, "NO", 2) == 0)
+		cube->NO = ft_strtrim(line + 3, " \n");
+	else if(ft_strncmp(line, "SO", 2) == 0)
+		cube->SO = ft_strtrim(line + 3, " \n");
+	else if(ft_strncmp(line, "WE", 2) == 0)
+		cube->WE = ft_strtrim(line + 3, " \n");
+	else if(ft_strncmp(line, "EA", 2) == 0)
+		cube->EA = ft_strtrim(line + 3, " \n");
+	else if(ft_strncmp(line, "F", 1) == 0)
+		cube->F = ft_strtrim(line + 2, " \n");
+	else if(ft_strncmp(line, "C", 1) == 0)
+		cube->C = ft_strtrim(line + 2, " \n");
 }
 
-int	parse_map(t_cube *textures, char **line, int fd)
+int	line_texture(char *line)
 {
-	int		i;
-	char	**buff;
-	//int		map_size;
+	if(ft_strncmp(line, "NO", 2) == 0)
+		return (0);
+	else if(ft_strncmp(line, "SO", 2) == 0)
+		return (0);
+	else if(ft_strncmp(line, "WE", 2) == 0)
+		return (0);
+	else if(ft_strncmp(line, "EA", 2) == 0)
+		return (0);
+	else if(ft_strncmp(line, "F", 1) == 0)
+		return (0);
+	else if(ft_strncmp(line, "C", 1) == 0)
+		return (0);
+	return (1);
+}
 
-	buff = malloc(sizeof(char *) * (99 + 1));
+void	fill_map(t_cube *cube)
+{
+	int	i;
+	int	j;
+
 	i = 0;
-	gnl(*line, fd);
-	// while(*line)
-	// 	*line++;
-	while(*line)
-		buff[i++] = ft_strdup(*line++);
-	textures->map = ft_split(*buff, '\n');
-	free(buff);
-	return (0);
+	while(cube->tmp_map[i])
+		i++;
+	cube->map = malloc (sizeof(char *) * i);
+	i = 0;
+	j = 0;
+	while(cube->tmp_map[i])
+	{
+		if (line_texture(cube->tmp_map[i]) == 1)
+		{
+			cube->map[j] = ft_strdup(cube->tmp_map[i]);
+			j++;
+		}
+		i++;
+	}
+	cube->map[j] = NULL;
+	free_map(cube->tmp_map);
+}
+
+void	fill_textures(t_cube *cube)
+{
+	int	i;
+
+	i = 0;
+	while (cube->tmp_map[i])
+	{
+		parse_texture(cube->tmp_map[i], cube);
+		i++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/25 12:47:37 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:29:54 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,77 @@ int	checkelements(t_cube *cube)
 	}
 	return (0);
 }
-int	check_textures(t_cube *textures)
+
+int	checkposition(t_cube *cube)
 {
-	if(!textures->NO || !textures->SO || !textures->WE || !textures->EA
-		|| !textures->F || !textures->C)
-		printf("Error Missing texture\n");
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cube->map[i])
+	{
+		j = 0;
+		while (cube->map[i][j])
+		{
+			if (cube->map[i][j] == 'N' || cube->map[i][j] == 'S'
+				|| cube->map[i][j] == 'E' || cube->map[i][j] == 'W')
+			{
+				cube->player.pos_x = i;
+				cube->player.pos_y = j;
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int	check_textures(t_cube *cube)
+{
+	if(cube->NO == NULL || cube->SO == NULL || cube->WE == NULL
+		|| cube->EA == NULL || cube->F == NULL || cube->C == NULL)
+		return (-1);
 	return (0);
 }
 
+int	checknplayer(char **map)
+{
+	int	i;
+	int	j;
+	int	n;
 
+	i = 0;
+	n = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+				n++;
+			j++;
+		}
+		if (n > 1)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int	argv_check(char *argv)
+{
+	int	i;
+
+	if (!argv)
+		return (0);
+	i = 0;
+	while (argv[i])
+		i++;
+	i -= 1;
+	if (argv[i] == 'b' && argv[i - 1] == 'u'
+		&& argv[i - 2] == 'c' && argv[i - 3] == '.')
+		return (1);
+	return (0);
+}

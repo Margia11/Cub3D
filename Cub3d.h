@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/25 12:45:08 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:34:25 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_ray
 typedef struct s_cube
 {
 	void		*mlx;
-	void		*mlx_win;
 	void		*win;
 	char 		**map;
 	char		**tmp_map;
@@ -73,8 +72,6 @@ typedef struct s_cube
 	char		*F; //floor
 	char		*C; //ceiling soffitto
 	int			R[2]; //color
-	int			map_width;
-	int			map_height;
 }	t_cube;
 
 //utils.c
@@ -84,22 +81,32 @@ void	gnl(char *line, int fd);
 void	free_mat(char **mat);
 
 //controls1.c
-int		map_format(char *argv);
-int		checkbordes_top_down(char **map);
-int		checkbordes_left_right(char **map);
-int		checkbordes_mid(t_cube *cube);
-void	mapchecks(t_cube *cube);
+int		checkbordes_first(char **map);
+int		checkbordes_last(char **map);
+int		checkbordes_left(char **map);
+int		checkbordes_right(char **map);
+int		checkbordes_mid_zero(t_cube *cube);
 
 //controls2.c
 int		checkelements(t_cube *cube);
 int		check_textures(t_cube *textures);
-int		check_argc(int argc);
+int		checkposition(t_cube *cube);
+int		checknplayer(char **map);
+int		argv_check(char *argv);
+
+//controls3.c
+int		checkbordes_mid_north(t_cube *cube);
+int		checkbordes_mid_south(t_cube *cube);
+int		checkbordes_mid_east(t_cube *cube);
+int		checkbordes_mid_west(t_cube *cube);
+int		map_ctrl(t_cube *cube);
 
 //parser.c
-void	read_input(t_cube *textures, char **line, int fd);
-int		parse_texture(char *line, t_cube *textures);
-int		parse_map(t_cube *textures, char **line, int fd);
-
+void	read_map(char *str, t_cube *cube);
+void	parse_texture(char *line, t_cube *cube);
+int		line_texture(char *line);
+void	fill_map(t_cube *cube);
+void	fill_textures(t_cube *cube);
 
 //init.c
 void	game_init(t_cube *cube);
@@ -107,7 +114,9 @@ void	init_cube(t_cube *cube);
 void	init_player(t_cube *cube);
 
 //cube.c
-int		end_game(t_cube *cube);
+void	free_map(char **mat);
+void	print_map(t_cube *cube);
+
 
 //raycasting.c
 void	init_ray(t_ray *ray, t_player *player, int x);

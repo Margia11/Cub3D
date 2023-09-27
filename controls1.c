@@ -3,69 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   controls1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:55:55 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/25 12:33:12 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:10:35 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-int checkbordes_top_down(char **map)
+int checkbordes_first(char **map)
 {
-	int	x;
-	int	y;
 	int	k;
 
-	x = 0;
 	k = 0;
-	while(map[k] != NULL)
+	while(map[0][k])
+	{
+		if(map[0][k] != '1' && map[0][k] != ' ')
+			return(-1);
 		k++;
-	y = -1;
-	while(map[x][++y] != '\0')
-	{
-		if(map[x][y] != '1' && map[x][y] != ' ')
-			return(-1);
-	}
-	while(map[k][++y] != '\0')
-	{
-		if(map[k][y] != '1' && map[k][y] != ' ')
-			return(-1);
 	}
 	return(0);
 }
 
-int checkbordes_left_right(char **map)
+int checkbordes_last(char **map)
+{
+	int	x;
+	int	k;
+
+	x = 0;
+	k = 0;
+	while(map[x])
+		x++;
+	x--;
+	while(map[x][k])
+	{
+		if(map[x][k] != '1' && map[x][k] != ' ')
+			return(-1);
+		k++;
+	}
+	return(0);
+}
+
+int	checkbordes_left(char **map)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	y = 0;
-	while(map[x] != NULL)
+	while(map[x])
 	{
-		if(map[x][y] != '1' && map[x][y] != ' ')
-			return(-1);
-		while(map[x][y] != '\0')
+		y = 0;
+		while(map[x][y] == ' ')
 			y++;
-		if(map[x][y] != '1' && map[x][y] != ' ')
+		if(map[x][y] != '1')
 			return(-1);
 		x++;
 	}
 	return(0);
 }
-//controllo che intorno allo 0 non ci siano spazi
-int	checkbordes_mid(t_cube *cube)
+
+int	checkbordes_right(char **map)
 {
 	int	x;
 	int	y;
 
 	x = 0;
-	y = 0;
-	while(cube->map[x] != NULL)
+	while(map[x])
 	{
-		while(cube->map[x][y] != '\0')
+		y = 0;
+		while(map[x][y])
+			y++;
+		y--;
+		if(map[x][y] != '1')
+			return(-1);
+		x++;
+	}
+	return(0);
+}
+
+int	checkbordes_mid_zero(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while(cube->map[x])
+	{
+		y = 0;
+		while(cube->map[x][y])
 		{
 			if(cube->map[x][y] == '0' && cube->map[x][y + 1] == ' ')
 				return(-1);
@@ -80,23 +106,4 @@ int	checkbordes_mid(t_cube *cube)
 		x++;
 	}
 	return(0);
-}
-
-void mapchecks(t_cube *cube)
-{
-	if(checkbordes_top_down(cube->map) == -1)
-	{
-		printf("Error Map not closed on top or bottom\n");
-		exit(0);
-	}
-	if(checkbordes_left_right(cube->map) == -1)
-	{
-		printf("Error Map not closed on left or right\n");
-		exit(0);
-	}
-	if(checkbordes_mid(cube) == -1)
-	{
-		printf("Error Map not closed in the middle\n");
-		exit(0);
-	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
+#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/25 12:11:47 by gpecci           ###   ########.fr        #
+#    Updated: 2023/09/27 13:36:50 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@ LIBFT			=	$(LIBFT_PATH)/libft.a
 SOURCES_FILES	=	cube.c\
 					controls1.c\
 					controls2.c\
+					controls3.c\
 					init.c\
-					utils.c \
 					get_next_line/get_next_line.c\
 					get_next_line/get_next_line_utils.c\
-					#parser.c \
+					parser.c \
 
 HEADER			=	./Cub3d.h
 
