@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/27 13:33:48 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/27 14:47:19 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,52 @@ void	print_map(t_cube *cube)
 	}
 }
 
+void	init_map(char *str, t_cube *cube)
+{
+	read_map(str, cube);
+	init_textures(cube);
+	fill_textures(cube);
+	fill_map(cube);
+}
+
+void	init_game(t_cube *cube)
+{
+	cube->mlx = mlx_init();
+	cube->win = mlx_new_window(cube->mlx, 1400, 700, "cub3d");
+}
+
+int	exit_game(t_cube *cube)
+{
+	free_map(cube->map);
+	exit(0);
+	return (0);
+}
+
+static int	keypress(int keycode, t_cube *cube)
+{
+	if (keycode == KEY_ESC || keycode == KEY_Q)
+		exit_game(cube);
+	return (0);
+}
+
+static void	gameplay(t_cube *cube)
+{
+	//da aggiungere altri hook
+	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
+}
+
 int main(int argc, char **argv)
 {
 	t_cube	cube;
 
 	if (argc == 2)
 	{
-		read_map(argv[1], &cube);
-		init_textures(&cube);
-		fill_textures(&cube);
-		fill_map(&cube);
+		init_map(argv[1], &cube);
 		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
 		{
-			printf("OK\n");
-		//		gameplay effettivo
-		// 		mlx_loop(cube.mlx);
+			init_game(&cube);
+			gameplay(&cube);
+			mlx_loop(cube.mlx);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/27 13:34:25 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/27 14:30:31 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ typedef struct s_cube
 	int			R[2]; //color
 }	t_cube;
 
+# define KEY_ESC 53
+# define KEY_Q 12
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
 char	*rev_string(char *s);
@@ -109,9 +120,7 @@ void	fill_map(t_cube *cube);
 void	fill_textures(t_cube *cube);
 
 //init.c
-void	game_init(t_cube *cube);
-void	init_cube(t_cube *cube);
-void	init_player(t_cube *cube);
+void	init_textures(t_cube *cube);
 
 //cube.c
 void	free_map(char **mat);
