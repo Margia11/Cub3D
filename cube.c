@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/27 14:47:19 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/28 10:40:35 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ void	print_map(t_cube *cube)
 		printf("%s\n", cube->map[i]);
 		i++;
 	}
-}
-
-void	init_map(char *str, t_cube *cube)
-{
-	read_map(str, cube);
-	init_textures(cube);
-	fill_textures(cube);
-	fill_map(cube);
-}
-
-void	init_game(t_cube *cube)
-{
-	cube->mlx = mlx_init();
-	cube->win = mlx_new_window(cube->mlx, 1400, 700, "cub3d");
 }
 
 int	exit_game(t_cube *cube)

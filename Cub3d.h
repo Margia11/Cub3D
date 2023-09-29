@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/27 14:30:31 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/28 10:42:32 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	fill_textures(t_cube *cube);
 
 //init.c
 void	init_textures(t_cube *cube);
+void	init_map(char *str, t_cube *cube);
+void	init_game(t_cube *cube);
 
 //cube.c
 void	free_map(char **mat);

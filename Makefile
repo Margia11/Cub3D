@@ -6,7 +6,7 @@
 #    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/27 13:38:36 by andreamargi      ###   ########.fr        #
+#    Updated: 2023/09/28 10:35:03 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ MINILIBX_PATH	=	./mlx
 MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
 LIBFT_PATH		=	./libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
+
+MAKEFLAGS += --silent
 
 SOURCES_FILES	=	cube.c\
 					controls1.c\
@@ -46,7 +48,8 @@ MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all:			$(NAME)
 
 $(NAME):	$(OBJECTS) $(LIBFT)
-				$(CC) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+				$(CC) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) $(SILENT_FLAG) -o $(NAME)
+		@echo "\033[32mCompiled OK!\033[0m"
 
 $(MINILIBX):
 				make -C $(MINILIBX_PATH)
@@ -57,11 +60,13 @@ $(LIBFT):
 clean:
 				${RM} ${OBJECTS}
 				make clean -C ${LIBFT_PATH}
+		@echo "\033[33mclean OK!\033[0m"
 
 fclean:			clean
 					rm -f $(NAME)
 					rm -f $(LIBFT)
-
+		@echo "\033[33mfclean OK!\033[0m"
+		
 re:				fclean all
 
 .PHONY:			all clean re
