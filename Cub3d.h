@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/29 15:16:46 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/02 15:58:53 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,18 @@
 #include <fcntl.h>
 #include <limits.h>
 
+typedef struct s_img
+{
+	void	*img;
+	char	*path;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}	t_img;
+
 typedef struct s_player
 {
+	char	view;
 	double	pos_x;
 	double	pos_y;
 	double	cam_side;
@@ -55,24 +65,37 @@ typedef struct s_ray
 	int		draw_end;
 }	t_ray;
 
+typedef struct s_object
+{
+	char			type;
+	int				x;
+	int				y;
+	double			dist;
+	t_img			img;
+	struct s_object	*next;
+	struct s_object	*sort;
+}	t_object;
+
 typedef struct s_cube
 {
-	void		*mlx;
-	void		*win;
-	int			map_w;
-	int			map_h;
-	char 		**map;
-	char		**tmp_map;
-	t_player	player;
-	t_ray		ray;
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
-	char		*f_temp;
-	char		*c_temp;
-	int			F[3]; //floor
-	int			C[3]; //ceiling soffitto
+	void			*mlx;
+	void			*win;
+	int				map_w;
+	int				map_h;
+	char 			**map;
+	char			**tmp_map;
+	char			*f_temp;
+	char			*c_temp;
+	int				F[3]; //floor
+	int				C[3]; //ceiling soffitto
+	t_img			no;
+	t_img			so;
+	t_img			we;
+	t_img			ea;
+	t_object		*objs;
+	t_object		*sort;
+	t_player		player;
+	t_ray			*ray;
 }	t_cube;
 
 # define KEY_ESC 53
@@ -85,12 +108,8 @@ typedef struct s_cube
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
-
-//utils.c
-int		ft_strcmp(char *s1, char *s2);
-char	*rev_string(char *s);
-void	gnl(char *line, int fd);
-void	free_mat(char **mat);
+# define WINDOW_W 1280
+# define WINDOW_H 960
 
 //controls1.c
 int		checkbordes_first(char **map);
@@ -121,18 +140,29 @@ void	fill_map(t_cube *cube);
 void	fill_textures(t_cube *cube);
 
 //init.c
+int		my_strchr(char *s, int n);
 void	init_textures(t_cube *cube);
 void	init_map(char *str, t_cube *cube);
+int		ft_matlen(char **mat);
+void	ctrl_ftemp(t_cube *cube);
+void	ctrl_ctemp(t_cube *cube);
+void	ctrl_comma(char *str, t_cube *cube);
+void	init_rgb(t_cube *cube);
 void	init_game(t_cube *cube);
 
 //cube.c
 void	free_map(char **mat);
 void	print_map(t_cube *cube);
-
+int		exit_game(t_cube *cube);
+int		keypress(int keycode, t_cube *cube);
+void	gameplay(t_cube *cube);
 
 //raycasting.c
 void	init_ray(t_ray *ray, t_player *player, int x);
 void	dda(t_ray *ray, t_cube *cube);
 void	calc_line_height(t_ray *ray, t_cube *cube);
+
+//player.c
+void	set_player(t_cube *cube);
 
 #endif

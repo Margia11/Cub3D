@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/29 15:16:02 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/02 15:01:39 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	read_map(char *str, t_cube *cube)
 void	parse_texture(char *line, t_cube *cube)
 {
 	if(ft_strncmp(line, "NO", 2) == 0)
-		cube->NO = ft_strtrim(line + 3, " \n");
+		cube->no.path = ft_strtrim(line + 3, " \n");
 	else if(ft_strncmp(line, "SO", 2) == 0)
-		cube->SO = ft_strtrim(line + 3, " \n");
+		cube->so.path = ft_strtrim(line + 3, " \n");
 	else if(ft_strncmp(line, "WE", 2) == 0)
-		cube->WE = ft_strtrim(line + 3, " \n");
+		cube->we.path = ft_strtrim(line + 3, " \n");
 	else if(ft_strncmp(line, "EA", 2) == 0)
-		cube->EA = ft_strtrim(line + 3, " \n");
+		cube->ea.path = ft_strtrim(line + 3, " \n");
 	else if(ft_strncmp(line, "F", 1) == 0)
 		cube->f_temp = ft_strtrim(line + 2, " \n");
 	else if(ft_strncmp(line, "C", 1) == 0)

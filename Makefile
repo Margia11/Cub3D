@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
+#    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/09/28 10:35:03 by andreamargi      ###   ########.fr        #
+#    Updated: 2023/10/02 15:57:48 by gpecci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SOURCES_FILES	=	cube.c\
 					get_next_line/get_next_line.c\
 					get_next_line/get_next_line_utils.c\
 					parser.c \
+					player.c \
 
 HEADER			=	./Cub3d.h
 
@@ -66,7 +67,7 @@ fclean:			clean
 					rm -f $(NAME)
 					rm -f $(LIBFT)
 		@echo "\033[33mfclean OK!\033[0m"
-		
+
 re:				fclean all
 
 .PHONY:			all clean re
