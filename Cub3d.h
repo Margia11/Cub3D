@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/09/28 10:42:32 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/29 15:16:46 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
-	char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	cam_side;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x; //camera x
 	double	plane_y; // camera y
-	int		screen_width;
-	int		screen_height;
 }	t_player;
 
 typedef struct s_ray
@@ -61,6 +59,8 @@ typedef struct s_cube
 {
 	void		*mlx;
 	void		*win;
+	int			map_w;
+	int			map_h;
 	char 		**map;
 	char		**tmp_map;
 	t_player	player;
@@ -69,9 +69,10 @@ typedef struct s_cube
 	char		*SO;
 	char		*WE;
 	char		*EA;
-	char		*F; //floor
-	char		*C; //ceiling soffitto
-	int			R[2]; //color
+	char		*f_temp;
+	char		*c_temp;
+	int			F[3]; //floor
+	int			C[3]; //ceiling soffitto
 }	t_cube;
 
 # define KEY_ESC 53

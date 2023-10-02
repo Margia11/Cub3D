@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/27 13:31:24 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/29 15:16:02 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	parse_texture(char *line, t_cube *cube)
 	else if(ft_strncmp(line, "EA", 2) == 0)
 		cube->EA = ft_strtrim(line + 3, " \n");
 	else if(ft_strncmp(line, "F", 1) == 0)
-		cube->F = ft_strtrim(line + 2, " \n");
+		cube->f_temp = ft_strtrim(line + 2, " \n");
 	else if(ft_strncmp(line, "C", 1) == 0)
-		cube->C = ft_strtrim(line + 2, " \n");
+		cube->c_temp = ft_strtrim(line + 2, " \n");
 }
 
 int	line_texture(char *line)

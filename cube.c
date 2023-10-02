@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/28 10:40:35 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/01 16:18:48 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	print_map(t_cube *cube)
 		printf("%s\n", cube->map[i]);
 		i++;
 	}
+	printf("%s\n", cube->NO);
+	printf("%s\n", cube->SO);
+	printf("%s\n", cube->EA);
+	printf("%s\n", cube->WE);
 }
 
 int	exit_game(t_cube *cube)
@@ -55,6 +59,7 @@ static void	gameplay(t_cube *cube)
 {
 	//da aggiungere altri hook
 	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
+	mlx_hook(cube->win, 17, 1L << 17, exit_game, cube);
 }
 
 int main(int argc, char **argv)
@@ -67,6 +72,7 @@ int main(int argc, char **argv)
 		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
 		{
 			init_game(&cube);
+			printf("%D\n", cube.F[2]);
 			gameplay(&cube);
 			mlx_loop(cube.mlx);
 		}

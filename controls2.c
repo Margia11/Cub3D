@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/09/27 13:29:54 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/09/29 15:22:36 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	checkposition(t_cube *cube)
 int	check_textures(t_cube *cube)
 {
 	if(cube->NO == NULL || cube->SO == NULL || cube->WE == NULL
-		|| cube->EA == NULL || cube->F == NULL || cube->C == NULL)
+		|| cube->EA == NULL || cube->f_temp == NULL || cube->c_temp == NULL)
 		return (-1);
 	return (0);
 }
