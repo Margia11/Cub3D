@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/02 14:58:34 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/04 12:37:12 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,31 @@ int	exit_game(t_cube *cube)
 int	keypress(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC || keycode == KEY_Q)
-		exit_game(cube);
+		end_game(cube);
+	else if (keycode == KEY_W)
+		move_up_down(cube, 1.0);
+	else if (keycode == KEY_S)
+		move_up_down(cube, -1.0);
+	else if (keycode == KEY_LEFT)
+		move_cam(cube, -1.0, ROTSPEED);
+	else if (keycode == KEY_RIGHT)
+		move_cam(cube, 1.0, ROTSPEED);
+	else if (keycode == KEY_A)
+		move_left_right(cube, -1.0);
+	else if (keycode == KEY_D)
+		move_left_right(cube, 1.0);
+	else if (keycode == 49)
+		open_door(cube);
 	return (0);
 }
 
 void	gameplay(t_cube *cube)
 {
-	//da aggiungere altri hook
+	mlx_hook(cube->win, 17, 0, exit_game, cube);
 	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
-	mlx_hook(cube->win, 17, 1L << 17, exit_game, cube);
+	mlx_hook(cube->win, 6, 0, mouse_filter, cube);
+	mlx_loop_hook(cube->mlx, game_loop, cube);
+	mlx_loop(cube->mlx);
 }
 
 int main(int argc, char **argv)
@@ -71,7 +87,6 @@ int main(int argc, char **argv)
 		{
 			init_game(&cube);
 			gameplay(&cube);
-			mlx_loop(cube.mlx);
 		}
 		else
 		{

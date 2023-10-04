@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/02 15:58:53 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/04 12:38:46 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,22 @@ typedef struct s_player
 	double	plane_y; // camera y
 }	t_player;
 
-typedef struct s_ray
-{
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
-	double	side_dist_x; //perpendicular distance to a wall
-	double	side_dist_y;
-	double	delta_dist_x; //length of ray from one x or y-side to next x or y-side
-	double	delta_dist_y;
-	double	perp_wall_dist; //length of ray from current position to next x or y-side
-	int		step_x; //what direction to step in x or y-direction (either +1 or -1)
-	int		step_y;
-	int		hit; //was there a wall hit?
-	int		side; //was a NS or a EW wall hit?
-	int		line_height; //height of line to draw on screen
-	int		draw_start;
-	int		draw_end;
+typedef struct s_ray {
+	int		pos[2];
+	int		draw[2];
+	int		incr[2];
+	int		ray_id;
+	int		side;
+	int		wall_height;
+	int		lenght;
+	int		texx;
+	double	dir[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	double	wallx;
+	double	step;
+	double	texpos;
+	double	wall_dist;
 }	t_ray;
 
 typedef struct s_object
@@ -110,6 +107,9 @@ typedef struct s_cube
 # define KEY_RIGHT 124
 # define WINDOW_W 1280
 # define WINDOW_H 960
+# define ROTSPEED 0.06
+# define MOVSPEED 0.04
+# define MOUSESPEED 0.01
 
 //controls1.c
 int		checkbordes_first(char **map);
@@ -164,5 +164,13 @@ void	calc_line_height(t_ray *ray, t_cube *cube);
 
 //player.c
 void	set_player(t_cube *cube);
+void	move_up_down(t_cube *cube, double dir);
+void	move_left_right(t_cube *cube, double dir);
+void	move_cam(t_cube *cube, double dir, double speed);
+void	open_door(t_cube *cube);
+int		mouse_filter(int x, int y, t_cube *cube);
+
+//game.c
+int		game_loop(t_cube *cube);
 
 #endif
