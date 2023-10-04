@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/04 12:38:46 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:44:07 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@
 #include <fcntl.h>
 #include <limits.h>
 
-typedef struct s_img
-{
-	void	*img;
-	char	*path;
-	int		bits_per_pixel;
-	int		line_lenght;
-	int		endian;
-}	t_img;
-
 typedef struct s_player
 {
 	char	view;
@@ -44,7 +35,8 @@ typedef struct s_player
 	double	plane_y; // camera y
 }	t_player;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	int		pos[2];
 	int		draw[2];
 	int		incr[2];
@@ -61,6 +53,17 @@ typedef struct s_ray {
 	double	texpos;
 	double	wall_dist;
 }	t_ray;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*path;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+	int		w;
+	int		h;
+}	t_img;
 
 typedef struct s_object
 {
@@ -87,12 +90,12 @@ typedef struct s_cube
 	int				C[3]; //ceiling soffitto
 	t_img			no;
 	t_img			so;
-	t_img			we;
 	t_img			ea;
+	t_img			we;
+	t_player		*player;
+	t_ray			*ray;
 	t_object		*objs;
 	t_object		*sort;
-	t_player		player;
-	t_ray			*ray;
 }	t_cube;
 
 # define KEY_ESC 53
@@ -168,7 +171,7 @@ void	move_up_down(t_cube *cube, double dir);
 void	move_left_right(t_cube *cube, double dir);
 void	move_cam(t_cube *cube, double dir, double speed);
 void	open_door(t_cube *cube);
-int		mouse_filter(int x, int y, t_cube *cube);
+int		mouse_filter(int x, t_cube *cube);
 
 //game.c
 int		game_loop(t_cube *cube);

@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/04 12:37:12 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:46:27 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	exit_game(t_cube *cube)
 int	keypress(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC || keycode == KEY_Q)
-		end_game(cube);
+		exit_game(cube);
 	else if (keycode == KEY_W)
 		move_up_down(cube, 1.0);
 	else if (keycode == KEY_S)
@@ -71,8 +71,8 @@ void	gameplay(t_cube *cube)
 {
 	mlx_hook(cube->win, 17, 0, exit_game, cube);
 	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
-	mlx_hook(cube->win, 6, 0, mouse_filter, cube);
-	mlx_loop_hook(cube->mlx, game_loop, cube);
+	// mlx_hook(cube->win, 6, 0, mouse_filter, cube);
+	// mlx_loop_hook(cube->mlx, game_loop, cube);
 	mlx_loop(cube->mlx);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/02 15:37:23 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/04 14:34:43 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	checkposition(t_cube *cube)
 			if (cube->map[i][j] == 'N' || cube->map[i][j] == 'S'
 				|| cube->map[i][j] == 'E' || cube->map[i][j] == 'W')
 			{
-				cube->player.view = cube->map[i][j];
-				cube->player.pos_x = i + 0.5;
-				cube->player.pos_y = j + 0.5;
+				cube->player->view = cube->map[i][j];
+				cube->player->pos_x = i + 0.5;
+				cube->player->pos_y = j + 0.5;
 				return (0);
 			}
 			j++;

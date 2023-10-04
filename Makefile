@@ -6,7 +6,7 @@
 #    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/10/02 15:57:48 by gpecci           ###   ########.fr        #
+#    Updated: 2023/10/04 14:44:31 by gpecci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOURCES_FILES	=	cube.c\
 					get_next_line/get_next_line_utils.c\
 					parser.c \
 					player.c \
+					game.c \
 
 HEADER			=	./Cub3d.h
 
