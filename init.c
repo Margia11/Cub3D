@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/02 15:54:40 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/06 18:06:32 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@ int	my_strchr(char *s, int n)
 
 void	init_textures(t_cube *cube)
 {
-	cube->no.path = NULL;
-	cube->so.path = NULL;
-	cube->we.path = NULL;
-	cube->ea.path = NULL;
+	cube->nopath = NULL;
+	cube->sopath = NULL;
+	cube->wepath = NULL;
+	cube->eapath = NULL;
 	cube->f_temp = NULL;
 	cube->c_temp = NULL;
 }
 
-void	init_map(char *str, t_cube *cube)
+void	init_map(char *str, t_cube *cube, t_player *player)
 {
 	read_map(str, cube);
 	init_textures(cube);
 	fill_textures(cube);
 	fill_map(cube);
-	set_player(cube);
+	set_player(player);
+	cube->player = player;
 }
 
 int	ft_matlen(char **mat)
@@ -145,8 +146,111 @@ void	init_rgb(t_cube *cube)
 	free(cube->c_temp);
 }
 
-void	init_game(t_cube *cube)
+int	load_text_walls(t_cube *cube, t_tex *tex, char *path)
 {
+	tex->xpm.img = mlx_xpm_file_to_image(cube->mlx, path,
+			&tex->w, &tex->h);
+	if (!tex->xpm.img)
+		return (1);
+	tex->xpm.addr = mlx_get_data_addr(tex->xpm.img,
+			&tex->xpm.bits_per_pixel, &tex->xpm.line_length,
+			&tex->xpm.endian);
+	if (!tex->xpm.addr)
+		return (1);
+	return (0);
+}
+
+void	walls(t_cube *cube)
+{
+	if (cube->nopath != NULL)
+		load_text_walls(cube, &(cube->tex->no), cube->nopath);
+	if (cube->sopath != NULL)
+		load_text_walls(cube, &(cube->tex->so), cube->sopath);
+	if (cube->eapath != NULL)
+		load_text_walls(cube, &(cube->tex->ea), cube->eapath);
+	if (cube->wepath != NULL)
+		load_text_walls(cube, &(cube->tex->we), cube->wepath);
+}
+
+char	**full_map(char **map, t_cube *cube)
+{
+	char	**res;
+	int		i;
+	int		j;
+
+	i = 0;
+
+	res = malloc(sizeof(char *) * (cube->map_h + 1));
+	while (map[i])
+	{
+		j = 0;
+		res[i] = malloc (sizeof(char) * cube->max);
+		while (map[i][j])
+		{
+			if (map[i][j] != ' ')
+				res[i][j] = map[i][j];
+			else
+				res[i][j] = '1';
+			j++;
+		}
+		while (j < cube->max)
+		{
+			res[i][j] = '1';
+			j++;
+		}
+		res[i][j] = '\0';
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+
+static int ft_maxlen(char **map)
+{
+	int	i;
+	int	j;
+	int	n;
+	int res;
+
+	i = 0;
+	res = ft_strlen(map[0]);
+	while (map[i])
+	{
+		n = 0;
+		j = 0;
+		while (map[i][j])
+		{
+			j++;
+			n++;
+		}
+		if (n > res)
+			res = n;
+		i++;
+	}
+	return (res);
+}
+
+static char	**copy_map(char **map, int n)
+{
+	char	**res;
+	int		i;
+
+	i = 0;
+	res = malloc(sizeof(char*) * n);
+	while (map[i])
+	{
+		res[i] = ft_strdup(map[i]);
+		i++;
+	}
+	res[i] = NULL;
+	return (res);
+}
+
+void	init_game(t_cube *cube, t_img *img)
+{
+	char	**tmp;
+
 	init_rgb(cube);
 	if (cube->F[0] < 0 || cube->F[0] > 255 || cube->F[1] < 0
 		|| cube->F[1] > 255 || cube->F[2] < 0 || cube->F[2] > 255)
@@ -163,5 +267,15 @@ void	init_game(t_cube *cube)
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, WINDOW_W, WINDOW_H, "cub3d");
 	cube->map_h = ft_matlen(cube->map);
+	cube->max = ft_maxlen(cube->map) + 1;
 	cube->map_w = ft_strlen(cube->map[0]);
+	tmp = copy_map(cube->map, cube->map_h);
+	free_map(cube->map);
+	cube->map = full_map(tmp, cube);
+	free_map(tmp);
+	walls(cube);
+	img->img = mlx_new_image(cube->mlx, WINDOW_W, WINDOW_H);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	cube->img = img;
 }

@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/04 14:46:27 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/06 17:43:37 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,26 @@ void	free_map(char **mat)
 	free(mat);
 }
 
-void	print_map(t_cube *cube)
+void	print_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while(cube->map[i])
+	while (map[i])
 	{
-		printf("%s\n", cube->map[i]);
+		printf("%s\n", map[i]);
 		i++;
 	}
 }
 
 int	exit_game(t_cube *cube)
 {
-	free(cube->f_temp);
-	free(cube->c_temp);
-	free_map(cube->map);
+	if (cube->f_temp)
+		free(cube->f_temp);
+	if (cube->c_temp)
+		free(cube->c_temp);
+	if (cube->map)
+		free_map(cube->map);
 	exit(0);
 	return (0);
 }
@@ -67,26 +70,23 @@ int	keypress(int keycode, t_cube *cube)
 	return (0);
 }
 
-void	gameplay(t_cube *cube)
-{
-	mlx_hook(cube->win, 17, 0, exit_game, cube);
-	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
-	// mlx_hook(cube->win, 6, 0, mouse_filter, cube);
-	// mlx_loop_hook(cube->mlx, game_loop, cube);
-	mlx_loop(cube->mlx);
-}
-
 int main(int argc, char **argv)
 {
-	t_cube	cube;
+	t_cube		cube;
+	t_img		img;
+	t_player	player;
 
 	if (argc == 2)
 	{
-		init_map(argv[1], &cube);
+		init_map(argv[1], &cube, &player);
 		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
 		{
-			init_game(&cube);
-			gameplay(&cube);
+			init_game(&cube, &img);
+			mlx_hook(cube.win, 17, 0, exit_game, &cube);
+			mlx_hook(cube.win, 2, 1L << 0, keypress, &cube);
+			// mlx_hook(cube->win, 6, 0, mouse_filter, cube);
+			mlx_loop_hook(cube.mlx, game_loop, &cube);
+			mlx_loop(cube.mlx);
 		}
 		else
 		{

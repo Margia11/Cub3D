@@ -6,7 +6,7 @@
 #    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/10/04 14:44:31 by gpecci           ###   ########.fr        #
+#    Updated: 2023/10/06 17:53:25 by gpecci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SOURCES_FILES	=	cube.c\
 					parser.c \
 					player.c \
 					game.c \
+					raycasting.c \
 
 HEADER			=	./Cub3d.h
 
@@ -40,7 +41,7 @@ RM				=	rm -f
 
 MLX				=	./libmlx.dylib
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g
 
 MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 
@@ -50,7 +51,7 @@ MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 all:			$(NAME)
 
 $(NAME):	$(OBJECTS) $(LIBFT)
-				$(CC) $(OBJECTS) $(LIBFT) $(MLX_FLAGS) $(SILENT_FLAG) -o $(NAME)
+				$(CC) $(OBJECTS) -g $(LIBFT) $(MLX_FLAGS) $(SILENT_FLAG) -o $(NAME)
 		@echo "\033[32mCompiled OK!\033[0m"
 
 $(MINILIBX):

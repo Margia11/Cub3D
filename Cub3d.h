@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/04 14:44:07 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/06 17:33:31 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@
 typedef struct s_player
 {
 	char	view;
-	double	pos_x;
-	double	pos_y;
+	double	pos[2];
 	double	cam_side;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x; //camera x
-	double	plane_y; // camera y
+	double	dir[2];
+	double	plane[2];
 }	t_player;
 
 typedef struct s_ray
@@ -54,15 +51,12 @@ typedef struct s_ray
 	double	wall_dist;
 }	t_ray;
 
-typedef struct s_img
-{
+typedef struct s_img {
 	void	*img;
-	char	*path;
+	char	*addr;
 	int		bits_per_pixel;
-	int		line_lenght;
+	int		line_length;
 	int		endian;
-	int		w;
-	int		h;
 }	t_img;
 
 typedef struct s_object
@@ -72,9 +66,26 @@ typedef struct s_object
 	int				y;
 	double			dist;
 	t_img			img;
-	struct s_object	*next;
-	struct s_object	*sort;
 }	t_object;
+
+typedef struct s_tex {
+	t_img	xpm;
+	int		w;
+	int		h;
+}	t_tex;
+
+typedef struct s_textures {
+	t_tex			wall;
+	t_tex			wall_side;
+	t_tex			no;
+	t_tex			so;
+	t_tex			we;
+	t_tex			ea;
+	t_tex			door;
+	t_tex			barrel;
+	t_tex			column;
+	t_tex			greenlight;
+}	t_textures;
 
 typedef struct s_cube
 {
@@ -82,16 +93,19 @@ typedef struct s_cube
 	void			*win;
 	int				map_w;
 	int				map_h;
+	int				max;
 	char 			**map;
 	char			**tmp_map;
 	char			*f_temp;
 	char			*c_temp;
 	int				F[3]; //floor
 	int				C[3]; //ceiling soffitto
-	t_img			no;
-	t_img			so;
-	t_img			ea;
-	t_img			we;
+	char			*nopath;
+	char			*sopath;
+	char			*eapath;
+	char			*wepath;
+	t_textures		*tex;
+	t_img			*img;
 	t_player		*player;
 	t_ray			*ray;
 	t_object		*objs;
@@ -145,28 +159,24 @@ void	fill_textures(t_cube *cube);
 //init.c
 int		my_strchr(char *s, int n);
 void	init_textures(t_cube *cube);
-void	init_map(char *str, t_cube *cube);
+void	init_map(char *str, t_cube *cube, t_player *player);
 int		ft_matlen(char **mat);
 void	ctrl_ftemp(t_cube *cube);
 void	ctrl_ctemp(t_cube *cube);
 void	ctrl_comma(char *str, t_cube *cube);
 void	init_rgb(t_cube *cube);
-void	init_game(t_cube *cube);
+void	init_game(t_cube *cube, t_img *img);
 
 //cube.c
+void	my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
 void	free_map(char **mat);
-void	print_map(t_cube *cube);
+void	print_map(char **map);
 int		exit_game(t_cube *cube);
 int		keypress(int keycode, t_cube *cube);
 void	gameplay(t_cube *cube);
 
-//raycasting.c
-void	init_ray(t_ray *ray, t_player *player, int x);
-void	dda(t_ray *ray, t_cube *cube);
-void	calc_line_height(t_ray *ray, t_cube *cube);
-
 //player.c
-void	set_player(t_cube *cube);
+void	set_player(t_player *player);
 void	move_up_down(t_cube *cube, double dir);
 void	move_left_right(t_cube *cube, double dir);
 void	move_cam(t_cube *cube, double dir, double speed);
@@ -175,5 +185,11 @@ int		mouse_filter(int x, t_cube *cube);
 
 //game.c
 int		game_loop(t_cube *cube);
+
+//raycasting.c
+double	absf(double i);
+int		engine(t_cube *cube, t_img *img, t_ray *ray);
+void	dda(t_cube *cube, t_ray *ray);
+void	draw_ray_text(t_cube *cube, int x, t_ray *ray, t_img *img);
 
 #endif
