@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:37:33 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/06 18:09:31 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:45:51 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	init_ray(t_cube *cube, t_ray *ray)
 		+ cube->player->plane[0] * cube->player->cam_side;
 	ray->dir[1] = cube->player->dir[1]
 		+ cube->player->plane[1] * cube->player->cam_side;
-	ray->pos[0] = cube->player->pos[0];
-	ray->pos[1] = cube->player->pos[1];
+	ray->pos[0] = (int) cube->player->pos[0];
+	ray->pos[1] = (int) cube->player->pos[1];
 	if (ray->dir[0] == 0)
 		ray->delta_dist[0] = 1e30;
 	else
@@ -45,7 +45,7 @@ static void	calc_incr(t_cube *cube, t_ray *ray)
 	if (ray->dir[0] < 0)
 	{
 		ray->incr[0] = -1;
-		ray->side_dist[0] = (cube->player->pos[1]
+		ray->side_dist[0] = (cube->player->pos[0]
 				- ((double) ray->pos[0])) * ray->delta_dist[0];
 	}
 	else
@@ -57,7 +57,7 @@ static void	calc_incr(t_cube *cube, t_ray *ray)
 	if (ray->dir[1] < 0)
 	{
 		ray->incr[1] = -1;
-		ray->side_dist[1] = (cube->player->pos[0]
+		ray->side_dist[1] = (cube->player->pos[1]
 				- ((double) ray->pos[1])) * ray->delta_dist[1];
 	}
 	else
@@ -66,6 +66,27 @@ static void	calc_incr(t_cube *cube, t_ray *ray)
 		ray->side_dist[1] = (((double) ray->pos[1]) + 1.0
 				- cube->player->pos[1]) * ray->delta_dist[1];
 	}
+}
+
+static void	init_draw(t_cube *cube, t_ray *ray)
+{
+	if (ray->side == 0)
+		ray->wall_dist = ray->side_dist[0] - ray->delta_dist[0];
+	else
+		ray->wall_dist = ray->side_dist[1] - ray->delta_dist[1];
+	ray->wall_height = (int) WINDOW_H / (ray->wall_dist);
+	ray->draw[0] = (WINDOW_H / 2) - (ray->wall_height / 2);
+	ray->draw[1] = (WINDOW_H / 2) + (ray->wall_height / 2);
+	if (ray->draw[0] < 0)
+		ray->draw[0] = 0;
+	if (ray->wall_dist <= 0)
+	{
+		ray->wall_height = WINDOW_H;
+		ray->wall_dist = 0;
+	}
+	if (ray->draw[1] >= WINDOW_H)
+		ray->draw[1] = WINDOW_H - 1;
+	cube->ray = ray;
 }
 
 static void	init_wall_vars(t_cube *cube, t_ray *ray)
@@ -85,27 +106,6 @@ static void	init_wall_vars(t_cube *cube, t_ray *ray)
 			+ ray->wall_height / 2) * ray->step;
 }
 
-static void	init_draw(t_ray *ray)
-{
-	if (ray->side == 0)
-		ray->wall_dist = ray->side_dist[0] - ray->delta_dist[0];
-	else
-		ray->wall_dist = ray->side_dist[1] - ray->delta_dist[1];
-	ray->wall_height = (int) WINDOW_H / (ray->wall_dist);
-	ray->draw[0] = (WINDOW_H / 2) - (ray->wall_height / 2);
-	ray->draw[1] = (WINDOW_H / 2) + (ray->wall_height / 2);
-	if (ray->draw[0] < 0)
-		ray->draw[0] = 0;
-	if (ray->wall_dist <= 0)
-	{
-		ray->wall_height = WINDOW_H;
-		ray->wall_dist = 0;
-	}
-	if (ray->draw[1] >= WINDOW_H)
-		ray->draw[1] = WINDOW_H - 1;
-}
-
-
 int	engine(t_cube *cube, t_img *img, t_ray *ray)
 {
 	int		i;
@@ -118,7 +118,7 @@ int	engine(t_cube *cube, t_img *img, t_ray *ray)
 		init_ray(cube, ray);
 		calc_incr(cube, ray);
 		dda(cube, ray);
-		init_draw(ray);
+		init_draw(cube, ray);
 		init_wall_vars(cube, ray);
 		draw_ray_text(cube, i, ray, img);
 		zbuffer[i] = ray->wall_dist;

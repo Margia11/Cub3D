@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/06 17:33:31 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:53:39 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct s_cube
 # define WINDOW_W 1280
 # define WINDOW_H 960
 # define ROTSPEED 0.06
-# define MOVSPEED 0.04
+# define MOVSPEED 0.10
 # define MOUSESPEED 0.01
 
 //controls1.c

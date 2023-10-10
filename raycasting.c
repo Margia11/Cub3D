@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:24:57 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/06 18:09:35 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:48:15 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static unsigned long int	get_color(t_cube *cube, t_ray *ray, int texy)
 	unsigned long int	color;
 
 	color = 0;
-	if (cube->map[(ray->pos[1])][(ray->pos[0])] == 'D')
+	if (cube->map[(ray->pos[0])][(ray->pos[1])] == '2')
 		color = get_pixel(&cube->tex->door.xpm, ray->texx, texy);
 	else if (ray->side == 0)
 	{

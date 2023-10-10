@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/06 17:43:37 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:52:38 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 			init_game(&cube, &img);
 			mlx_hook(cube.win, 17, 0, exit_game, &cube);
 			mlx_hook(cube.win, 2, 1L << 0, keypress, &cube);
-			// mlx_hook(cube->win, 6, 0, mouse_filter, cube);
+			// mlx_hook(cube.win, 6, 0, mouse_filter, &cube);
 			mlx_loop_hook(cube.mlx, game_loop, &cube);
 			mlx_loop(cube.mlx);
 		}

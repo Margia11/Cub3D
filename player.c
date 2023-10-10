@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/06 14:36:57 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:29:59 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	move_up_down(t_cube *cube, double dir)
 	pos_y = cube->player->pos[1];
 	npos_x = pos_x + (cube->player->dir[0] * MOVSPEED * dir);
 	npos_y = pos_y + (cube->player->dir[1] * MOVSPEED * dir);
-	if (cube->map[(int) npos_y][(int) npos_x] == '1')
+	if (cube->map[(int) npos_x][(int) npos_y] == '1')
 		return ;
-	if (cube->map[(int) npos_y][(int) npos_x] == '2')
+	if (cube->map[(int) npos_x][(int) npos_y] == '2')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
@@ -78,9 +78,9 @@ void	move_left_right(t_cube *cube, double dir)
 		+ (cube->player->plane[0] * MOVSPEED * dir);
 	npos_y = cube->player->pos[1]
 		+ (cube->player->plane[1] * MOVSPEED * dir);
-	if (cube->map[(int) npos_y][(int) npos_x] == '1')
+	if (cube->map[(int) npos_x][(int) npos_y] == '1')
 		return ;
-	if (cube->map[(int) npos_y][(int) npos_x] == '2')
+	if (cube->map[(int) npos_x][(int) npos_y] == '2')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;

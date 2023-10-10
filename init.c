@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/06 18:06:32 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 12:16:57 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ char	**full_map(char **map, t_cube *cube)
 	while (map[i])
 	{
 		j = 0;
-		res[i] = malloc (sizeof(char) * cube->max);
+		res[i] = malloc (sizeof(char) * (cube->max + 1));
 		while (map[i][j])
 		{
 			if (map[i][j] != ' ')
@@ -237,7 +237,7 @@ static char	**copy_map(char **map, int n)
 	int		i;
 
 	i = 0;
-	res = malloc(sizeof(char*) * n);
+	res = malloc(sizeof(char*) * (n + 1));
 	while (map[i])
 	{
 		res[i] = ft_strdup(map[i]);
@@ -267,7 +267,7 @@ void	init_game(t_cube *cube, t_img *img)
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, WINDOW_W, WINDOW_H, "cub3d");
 	cube->map_h = ft_matlen(cube->map);
-	cube->max = ft_maxlen(cube->map) + 1;
+	cube->max = ft_maxlen(cube->map);
 	cube->map_w = ft_strlen(cube->map[0]);
 	tmp = copy_map(cube->map, cube->map_h);
 	free_map(cube->map);
