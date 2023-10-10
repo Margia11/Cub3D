@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/10 12:53:39 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 14:19:46 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,13 @@ void	fill_textures(t_cube *cube);
 //init.c
 int		my_strchr(char *s, int n);
 void	init_textures(t_cube *cube);
-void	init_map(char *str, t_cube *cube, t_player *player);
+void	init_map(char *str, t_cube *cube);
 int		ft_matlen(char **mat);
 void	ctrl_ftemp(t_cube *cube);
 void	ctrl_ctemp(t_cube *cube);
 void	ctrl_comma(char *str, t_cube *cube);
 void	init_rgb(t_cube *cube);
-void	init_game(t_cube *cube, t_img *img);
+void	init_game(t_cube *cube, t_img *img, t_player *player);
 
 //cube.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);

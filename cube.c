@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 12:52:38 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 14:19:03 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		init_map(argv[1], &cube, &player);
+		init_map(argv[1], &cube);
 		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
 		{
-			init_game(&cube, &img);
+			init_game(&cube, &img, &player);
 			mlx_hook(cube.win, 17, 0, exit_game, &cube);
 			mlx_hook(cube.win, 2, 1L << 0, keypress, &cube);
 			// mlx_hook(cube.win, 6, 0, mouse_filter, &cube);

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 12:16:57 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 14:19:32 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ void	init_textures(t_cube *cube)
 	cube->c_temp = NULL;
 }
 
-void	init_map(char *str, t_cube *cube, t_player *player)
+void	init_map(char *str, t_cube *cube)
 {
 	read_map(str, cube);
 	init_textures(cube);
 	fill_textures(cube);
 	fill_map(cube);
-	set_player(player);
-	cube->player = player;
 }
 
 int	ft_matlen(char **mat)
@@ -247,7 +245,7 @@ static char	**copy_map(char **map, int n)
 	return (res);
 }
 
-void	init_game(t_cube *cube, t_img *img)
+void	init_game(t_cube *cube, t_img *img, t_player *player)
 {
 	char	**tmp;
 
@@ -264,6 +262,8 @@ void	init_game(t_cube *cube, t_img *img)
 		printf("RGB not valid\n");
 		exit_game(cube);
 	}
+	player = cube->player;
+	set_player(player);
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, WINDOW_W, WINDOW_H, "cub3d");
 	cube->map_h = ft_matlen(cube->map);
