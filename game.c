@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:37:33 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/10 12:45:51 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 14:32:28 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static void	init_wall_vars(t_cube *cube, t_ray *ray)
 			+ ray->wall_height / 2) * ray->step;
 }
 
-int	engine(t_cube *cube, t_img *img, t_ray *ray)
+int	raycast(t_cube *cube, t_img *img, t_ray *ray)
 {
 	int		i;
 	double	zbuffer[WINDOW_W];
@@ -127,6 +127,12 @@ int	engine(t_cube *cube, t_img *img, t_ray *ray)
 	// draw_sprites(cube, zbuffer);
 	// draw_crosshair(img);
 	return (0);
+}
+
+void	engine(t_cube *cube, t_img *img, t_ray *ray)
+{
+	raycast(cube, img, ray);
+	render_minimap(cube);
 }
 
 int	game_loop(t_cube *cube)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
+#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/10/06 17:53:25 by gpecci           ###   ########.fr        #
+#    Updated: 2023/10/10 14:32:40 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SOURCES_FILES	=	cube.c\
 					player.c \
 					game.c \
 					raycasting.c \
+					minimap.c \
 
 HEADER			=	./Cub3d.h
 

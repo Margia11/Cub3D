@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/10 14:19:46 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 14:40:34 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <limits.h>
+
+# define KEY_ESC 53
+# define KEY_Q 12
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define WINDOW_W 1280
+# define WINDOW_H 960
+# define ROTSPEED 0.06
+# define MOVSPEED 0.10
+# define MOUSESPEED 0.01
+# define PLAYER_R 10
 
 typedef struct s_player
 {
@@ -112,21 +129,6 @@ typedef struct s_cube
 	t_object		*sort;
 }	t_cube;
 
-# define KEY_ESC 53
-# define KEY_Q 12
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_UP 126
-# define KEY_DOWN 125
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define WINDOW_W 1280
-# define WINDOW_H 960
-# define ROTSPEED 0.06
-# define MOVSPEED 0.10
-# define MOUSESPEED 0.01
 
 //controls1.c
 int		checkbordes_first(char **map);
@@ -184,12 +186,16 @@ void	open_door(t_cube *cube);
 int		mouse_filter(int x, t_cube *cube);
 
 //game.c
+int		raycast(t_cube *cube, t_img *img, t_ray *ray);
 int		game_loop(t_cube *cube);
+void	engine(t_cube *cube, t_img *img, t_ray *ray);
 
 //raycasting.c
 double	absf(double i);
-int		engine(t_cube *cube, t_img *img, t_ray *ray);
 void	dda(t_cube *cube, t_ray *ray);
 void	draw_ray_text(t_cube *cube, int x, t_ray *ray, t_img *img);
+
+//minimap.c
+void	render_minimap(t_cube *cube);
 
 #endif
