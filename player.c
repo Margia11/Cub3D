@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/10 12:29:59 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:36:27 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	move_up_down(t_cube *cube, double dir)
 	npos_y = pos_y + (cube->player->dir[1] * MOVSPEED * dir);
 	if (cube->map[(int) npos_x][(int) npos_y] == '1')
 		return ;
-	if (cube->map[(int) npos_x][(int) npos_y] == '2')
+	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
@@ -80,7 +80,7 @@ void	move_left_right(t_cube *cube, double dir)
 		+ (cube->player->plane[1] * MOVSPEED * dir);
 	if (cube->map[(int) npos_x][(int) npos_y] == '1')
 		return ;
-	if (cube->map[(int) npos_x][(int) npos_y] == '2')
+	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
@@ -105,29 +105,56 @@ void	move_cam(t_cube *cube, double dir, double speed)
 		+ cube->player->plane[1] * cos(rot_dir);
 }
 
+static void	close_door(t_cube *cube)
+{
+	int	x;
+	int	y;
+
+	y = (int) cube->player->pos[0];
+	x = (int) cube->player->pos[1];
+	if (cube->map[(y) + 1][x] == 'o')
+		cube->map[(y) + 1][x] = 'c';
+	else if (cube->map[(y) - 1][x] == 'o')
+		cube->map[(y) - 1][x] = 'c';
+	else if (cube->map[(y)][(x) + 1] == 'o')
+		cube->map[(y)][(x) + 1] = 'c';
+	else if (cube->map[(y)][(x) - 1] == 'o')
+		cube->map[(y)][(x) - 1] = 'c';
+	else if (cube->map[(y) + 1][x] == 'o')
+		cube->map[(y) + 1][x] = 'c';
+	else if (cube->map[(y) - 1][x] == 'o')
+		cube->map[(y) - 1][x] = 'c';
+	else if (cube->map[(y)][(x) + 1] == 'o')
+		cube->map[(y)][(x) + 1] = 'c';
+	else if (cube->map[(y)][(x) - 1] == 'o')
+		cube->map[(y)][(x) - 1] = 'c';
+}
+
 void	open_door(t_cube *cube)
 {
 	int	x;
 	int	y;
 
-	x = (int) cube->player->pos[0];
-	y = (int) cube->player->pos[1];
-	if (cube->map[(y) + 1][x] == '2')
+	y = (int) cube->player->pos[0];
+	x = (int) cube->player->pos[1];
+	if (cube->map[(y) + 1][x] == 'c')
 		cube->map[(y) + 1][x] = 'o';
-	else if (cube->map[(y) - 1][x] == '2')
+	else if (cube->map[(y) - 1][x] == 'c')
 		cube->map[(y) - 1][x] = 'o';
-	else if (cube->map[(y)][(x) + 1] == '2')
+	else if (cube->map[(y)][(x) + 1] == 'c')
 		cube->map[(y)][(x) + 1] = 'o';
-	else if (cube->map[(y)][(x) - 1] == '2')
+	else if (cube->map[(y)][(x) - 1] == 'c')
 		cube->map[(y)][(x) - 1] = 'o';
-	else if (cube->map[(y) + 1][x] == '2')
+	else if (cube->map[(y) + 1][x] == 'c')
 		cube->map[(y) + 1][x] = 'o';
-	else if (cube->map[(y) - 1][x] == '2')
+	else if (cube->map[(y) - 1][x] == 'c')
 		cube->map[(y) - 1][x] = 'o';
-	else if (cube->map[(y)][(x) + 1] == '2')
+	else if (cube->map[(y)][(x) + 1] == 'c')
 		cube->map[(y)][(x) + 1] = 'o';
-	else if (cube->map[(y)][(x) - 1] == '2')
+	else if (cube->map[(y)][(x) - 1] == 'c')
 		cube->map[(y)][(x) - 1] = 'o';
+	else
+		close_door(cube);
 }
 
 int	mouse_filter(int x, t_cube *cube)

@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 14:19:32 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:25:23 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,11 @@ static char	**copy_map(char **map, int n)
 	return (res);
 }
 
+static void	door(t_cube *cube)
+{
+	load_text_walls(cube, &(cube->tex->door), "./pics/door.xpm");
+}
+
 void	init_game(t_cube *cube, t_img *img, t_player *player)
 {
 	char	**tmp;
@@ -274,6 +279,7 @@ void	init_game(t_cube *cube, t_img *img, t_player *player)
 	cube->map = full_map(tmp, cube);
 	free_map(tmp);
 	walls(cube);
+	door(cube);
 	img->img = mlx_new_image(cube->mlx, WINDOW_W, WINDOW_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/06 14:36:19 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/10 15:21:05 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int	checkelements(t_cube *cube)
 		while(cube->map[x][++y] != '\0')
 		{
 			if(cube->map[x][y] != '1' && cube->map[x][y] != '0'
-				&& cube->map[x][y] != ' ' && cube->map[x][y] != '2'
+				&& cube->map[x][y] != ' ' && cube->map[x][y] != 'c'
 				&& cube->map[x][y] != 'N' && cube->map[x][y] != 'S'
-				&& cube->map[x][y] != 'E' && cube->map[x][y] != 'W')
+				&& cube->map[x][y] != 'E' && cube->map[x][y] != 'W'
+				&& cube->map[x][y] != 'o')
 				return (-1);
 		}
 	}

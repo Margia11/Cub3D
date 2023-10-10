@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:24:46 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 14:48:08 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:41:35 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,27 @@ static void	draw_square(t_img *img, int len, int offset_x, int offset_y)
 		while (y < len)
 		{
 			my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0DDE3E4);
+			y++;
+		}
+		x++;
+	}
+}
+
+static void	draw_yellow_square(t_img *img, int len, int offset_x, int offset_y)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < len)
+	{
+		y = 0;
+		while (y < len)
+		{
+			if (x == 0 || y == 0 || x == len - 1 || y == len - 1)
+				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0000000);
+			else
+				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0FFDB28);
 			y++;
 		}
 		x++;
@@ -107,8 +128,10 @@ static void	draw_minimap(t_cube *cube, int start_x, int x)
 			draw_black_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] == '1')
 			draw_square_border(cube->img, 10, pix[0] + 10, pix[1]);
-		else if (cube->map[y][x] == '2')
+		else if (cube->map[y][x] == 'o')
 			draw_green_square(cube->img, 10, pix[0] + 10, pix[1]);
+		else if (cube->map[y][x] == 'c')
+			draw_yellow_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] != '1')
 			draw_square(cube->img, 10, pix[0] + 10, pix[1]);
 		y--;

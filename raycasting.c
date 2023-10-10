@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:24:57 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/10 12:48:15 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:29:30 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static unsigned long int	get_color(t_cube *cube, t_ray *ray, int texy)
 	unsigned long int	color;
 
 	color = 0;
-	if (cube->map[(ray->pos[0])][(ray->pos[1])] == '2')
+	if (cube->map[(ray->pos[0])][(ray->pos[1])] == 'c')
 		color = get_pixel(&cube->tex->door.xpm, ray->texx, texy);
 	else if (ray->side == 0)
 	{
@@ -125,7 +125,7 @@ static void	body(t_cube *cube, t_ray *ray)
 			ray->side = 1;
 		}
 		if (cube->map[(ray->pos[0])][(ray->pos[1])] == '1' ||
-			cube->map[(ray->pos[0])][(ray->pos[1])] == '2')
+			cube->map[(ray->pos[0])][(ray->pos[1])] == 'c')
 			hit = 1;
 	}
 }
