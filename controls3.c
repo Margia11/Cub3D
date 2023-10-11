@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:09:45 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/02 14:59:00 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/11 11:45:18 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,12 @@ int	checkbordes_mid_west(t_cube *cube)
 
 int map_ctrl(t_cube *cube)
 {
+	int	n;
+
+	n = 0;
+	while(cube->map[n])
+		n++;
+	n--;
 	if (checkelements(cube) == -1 || checkposition(cube) == -1)
 		return (-1);
 	if (check_textures(cube) == -1 || checknplayer(cube->map) == -1)
@@ -131,6 +137,10 @@ int map_ctrl(t_cube *cube)
 	if (checkbordes_mid_south(cube) == -1 || checkbordes_mid_east(cube) == -1)
 		return (-1);
 	if (checkbordes_mid_west(cube) == -1)
+		return (-1);
+	if (ft_strlen(cube->map[n]) < ft_strlen(cube->map[n - 1]) - 1)
+		return (-1);
+	if (ft_strlen(cube->map[0]) < ft_strlen(cube->map[1]) - 1)
 		return (-1);
 	return (0);
 }

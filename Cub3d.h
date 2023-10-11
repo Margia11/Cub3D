@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/10 14:40:34 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/11 11:54:41 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,11 @@ typedef struct s_tex {
 }	t_tex;
 
 typedef struct s_textures {
-	t_tex			wall;
-	t_tex			wall_side;
 	t_tex			no;
 	t_tex			so;
 	t_tex			we;
 	t_tex			ea;
 	t_tex			door;
-	t_tex			barrel;
-	t_tex			column;
-	t_tex			greenlight;
 }	t_textures;
 
 typedef struct s_cube
