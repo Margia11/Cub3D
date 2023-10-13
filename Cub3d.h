@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/13 17:07:52 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:23:34 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_textures {
 typedef struct s_cube
 {
 	int				ani;
+	int				mousex;
+	int				mousey;
 	void			*mlx;
 	void			*win;
 	int				map_w;
@@ -199,7 +201,7 @@ void	move_up_down(t_cube *cube, double dir);
 void	move_left_right(t_cube *cube, double dir);
 void	move_cam(t_cube *cube, double dir, double speed);
 void	open_door(t_cube *cube);
-int		mouse_filter(int x, t_cube *cube);
+int		mouse_filter(int x, int y, t_cube *cube);
 
 //game.c
 int		raycast(t_cube *cube, t_img *img, t_ray *ray);

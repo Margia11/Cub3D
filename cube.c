@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/13 17:07:45 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:32:26 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ void	print_map(char **map)
 
 int	exit_game(t_cube *cube)
 {
-	if (cube->nopath)
+	if (cube->nopath != NULL)
 		free(cube->nopath);
-	if (cube->sopath)
+	if (cube->sopath != NULL)
 		free(cube->sopath);
-	if (cube->wepath)
+	if (cube->wepath != NULL)
 		free(cube->wepath);
-	if (cube->eapath)
+	if (cube->eapath != NULL)
 		free(cube->eapath);
-	if (cube->f_temp)
+	if (cube->f_temp != NULL)
 		free(cube->f_temp);
-	if (cube->c_temp)
+	if (cube->c_temp != NULL)
 		free(cube->c_temp);
 	if (cube->map)
 		free_map(cube->map);
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 			init_game(&cube, &img, &player, &tex);
 			mlx_hook(cube.win, 17, 0, exit_game, &cube);
 			mlx_hook(cube.win, 2, 1L << 0, keypress, &cube);
-			// mlx_hook(cube.win, 6, 0, mouse_filter, &cube);
+			mlx_hook(cube.win, 6, 0, mouse_filter, &cube);
 			mlx_loop_hook(cube.mlx, game_loop, &cube);
 			mlx_loop(cube.mlx);
 		}

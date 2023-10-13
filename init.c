@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/13 17:07:26 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:25:59 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,6 @@ void	init_game(t_cube *cube, t_img *img, t_player *player, t_textures *tex)
 	cube->map = full_map(tmp, cube);
 	free_map(tmp);
 	walls(cube, tex);
-	printf("culo\n");
 	door(cube);
 	knight(cube);
 	img->img = mlx_new_image(cube->mlx, WINDOW_W, WINDOW_H);

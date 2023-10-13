@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/13 16:57:55 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:31:02 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,11 +187,12 @@ void	open_door(t_cube *cube)
 		close_door(cube);
 }
 
-int	mouse_filter(int x, t_cube *cube)
+int	mouse_filter(int x, int y, t_cube *cube)
 {
-	if (x < WINDOW_W / 2)
-		move_cam(cube, -1.0, MOUSESPEED);
-	else
-		move_cam(cube, 1.0, MOUSESPEED);
+	mlx_mouse_get_pos(cube->win, &x, &y);
+	if (x < WINDOW_W / 2 && y > WINDOW_H / 2)
+		move_cam(cube, -1.0, MOUSESPEED / 2);
+	else if (x >= WINDOW_W / 2 && y > WINDOW_H / 2)
+		move_cam(cube, 1.0, MOUSESPEED / 2);
 	return (0);
 }
