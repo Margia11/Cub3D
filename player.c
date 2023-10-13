@@ -6,11 +6,36 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/13 14:46:25 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:57:55 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+
+static void set_view_player(t_cube *cube, t_player *player)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (cube->map[i])
+	{
+		j = 0;
+		while (cube->map[i][j])
+		{
+			if (cube->map[i][j] == 'W' || cube->map[i][j] == 'N' || cube->map[i][j] == 'S' || cube->map[i][j] == 'E')
+			{
+				player->view = cube->map[i][j];
+				player->pos[0] = i + 0.5;
+				player->pos[1] = j + 0.5;
+				cube->player = player;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 static void	set_we(t_player *player)
 {
@@ -30,8 +55,9 @@ static void	set_we(t_player *player)
 	}
 }
 
-void	set_player(t_player *player)
+void	set_player(t_cube *cube, t_player *player)
 {
+	set_view_player(cube, player);
 	if (player->view == 'N')
 	{
 		player->dir[0] = 0.0;

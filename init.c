@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/13 15:59:56 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:07:26 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void	ctrl_comma(char *str, t_cube *cube)
 
 void	init_rgb(t_cube *cube)
 {
-	ctrl_comma(cube->c_temp, cube);
-	ctrl_comma(cube->f_temp, cube);
-	ctrl_ctemp(cube);
-	ctrl_ftemp(cube);
+	//ctrl_comma(cube->c_temp, cube);
+	//ctrl_comma(cube->f_temp, cube);
+	//ctrl_ctemp(cube);
+	//ctrl_ftemp(cube);
 	cube->F[0] = ft_atoi(ft_substr(cube->f_temp, 0, my_strchr(cube->f_temp, ',')));
 	cube->f_temp = ft_substr(cube->f_temp, my_strchr(cube->f_temp, ',') + 1, ft_strlen(cube->f_temp));
 	cube->F[1] = ft_atoi(ft_substr(cube->f_temp, 0, my_strchr(cube->f_temp, ',')));
@@ -158,8 +158,9 @@ int	load_text_walls(t_cube *cube, t_tex *tex, char *path)
 	return (0);
 }
 
-void	walls(t_cube *cube)
+void	walls(t_cube *cube, t_textures *tex)
 {
+	cube->tex = tex;
 	if (cube->nopath != NULL)
 		load_text_walls(cube, &(cube->tex->no), cube->nopath);
 	if (cube->sopath != NULL)
@@ -258,7 +259,7 @@ static void	knight(t_cube *cube)
 	load_text_walls(cube, &(cube->tex->knight4), "./pics/fire4.xpm");
 }
 
-void	init_game(t_cube *cube, t_img *img, t_player *player)
+void	init_game(t_cube *cube, t_img *img, t_player *player, t_textures *tex)
 {
 	char	**tmp;
 
@@ -275,8 +276,7 @@ void	init_game(t_cube *cube, t_img *img, t_player *player)
 		printf("RGB not valid\n");
 		exit_game(cube);
 	}
-	player = cube->player;
-	set_player(player);
+	set_player(cube, player);
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, WINDOW_W, WINDOW_H, "cub3d");
 	cube->map_h = ft_matlen(cube->map);
@@ -286,7 +286,8 @@ void	init_game(t_cube *cube, t_img *img, t_player *player)
 	free_map(cube->map);
 	cube->map = full_map(tmp, cube);
 	free_map(tmp);
-	walls(cube);
+	walls(cube, tex);
+	printf("culo\n");
 	door(cube);
 	knight(cube);
 	img->img = mlx_new_image(cube->mlx, WINDOW_W, WINDOW_H);

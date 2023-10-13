@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/13 15:10:18 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:07:52 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	ctrl_ftemp(t_cube *cube);
 void	ctrl_ctemp(t_cube *cube);
 void	ctrl_comma(char *str, t_cube *cube);
 void	init_rgb(t_cube *cube);
-void	init_game(t_cube *cube, t_img *img, t_player *player);
+void	init_game(t_cube *cube, t_img *img, t_player *player, t_textures *tex);
 
 //cube.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, unsigned int color);
@@ -194,7 +194,7 @@ int		keypress(int keycode, t_cube *cube);
 void	gameplay(t_cube *cube);
 
 //player.c
-void	set_player(t_player *player);
+void	set_player(t_cube *cube, t_player *player);
 void	move_up_down(t_cube *cube, double dir);
 void	move_left_right(t_cube *cube, double dir);
 void	move_cam(t_cube *cube, double dir, double speed);

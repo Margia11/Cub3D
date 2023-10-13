@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/13 15:46:07 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:07:45 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,14 @@ int main(int argc, char **argv)
 	t_cube		cube;
 	t_img		img;
 	t_player	player;
+	t_textures	tex;
 
 	if (argc == 2)
 	{
 		init_map(argv[1], &cube);
 		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
 		{
-			init_game(&cube, &img, &player);
+			init_game(&cube, &img, &player, &tex);
 			mlx_hook(cube.win, 17, 0, exit_game, &cube);
 			mlx_hook(cube.win, 2, 1L << 0, keypress, &cube);
 			// mlx_hook(cube.win, 6, 0, mouse_filter, &cube);
