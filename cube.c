@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 14:19:03 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 15:46:07 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	print_map(char **map)
 
 int	exit_game(t_cube *cube)
 {
+	if (cube->nopath)
+		free(cube->nopath);
+	if (cube->sopath)
+		free(cube->sopath);
+	if (cube->wepath)
+		free(cube->wepath);
+	if (cube->eapath)
+		free(cube->eapath);
 	if (cube->f_temp)
 		free(cube->f_temp);
 	if (cube->c_temp)

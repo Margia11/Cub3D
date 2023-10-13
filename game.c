@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:37:33 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/10 14:32:28 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 15:05:20 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ int	raycast(t_cube *cube, t_img *img, t_ray *ray)
 		zbuffer[i] = ray->wall_dist;
 		i++;
 	}
-	// draw_sprites(cube, zbuffer);
-	// draw_crosshair(img);
+	draw_knights(cube, zbuffer);
 	return (0);
 }
 
@@ -146,6 +145,7 @@ int	game_loop(t_cube *cube)
 		engine(cube, cube->img, &ray);
 		mlx_put_image_to_window(cube->mlx, cube->win,
 			cube->img->img, 0, 0);
+		update_animation(cube);
 		lock = 0;
 	}
 	else

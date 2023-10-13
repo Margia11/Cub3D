@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:24:46 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 15:41:35 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 16:01:51 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,24 @@ static void	draw_black_square(t_img *img, int len, int offset_x, int offset_y)
 	}
 }
 
+static void	draw_blue_square(t_img *img, int len, int offset_x, int offset_y)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < len)
+	{
+		y = 0;
+		while (y < len)
+		{
+			my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x00000FF);
+			y++;
+		}
+		x++;
+	}
+}
+
 static void	draw_square_border(t_img *img, int len, int offset_x, int offset_y)
 {
 	int	x;
@@ -132,6 +150,8 @@ static void	draw_minimap(t_cube *cube, int start_x, int x)
 			draw_green_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] == 'c')
 			draw_yellow_square(cube->img, 10, pix[0] + 10, pix[1]);
+		else if (cube->map[y][x] == 'K')
+			draw_blue_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] != '1')
 			draw_square(cube->img, 10, pix[0] + 10, pix[1]);
 		y--;

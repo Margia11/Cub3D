@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/10 15:36:27 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 14:46:25 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	move_up_down(t_cube *cube, double dir)
 		return ;
 	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
 		return ;
+	if (cube->map[(int) npos_x][(int) npos_y] == 'K')
+		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
 }
@@ -81,6 +83,8 @@ void	move_left_right(t_cube *cube, double dir)
 	if (cube->map[(int) npos_x][(int) npos_y] == '1')
 		return ;
 	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
+		return ;
+	if (cube->map[(int) npos_x][(int) npos_y] == 'K')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;

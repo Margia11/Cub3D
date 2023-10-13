@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/10 15:25:23 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 15:59:56 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,14 @@ static void	door(t_cube *cube)
 	load_text_walls(cube, &(cube->tex->door), "./pics/door.xpm");
 }
 
+static void	knight(t_cube *cube)
+{
+	load_text_walls(cube, &(cube->tex->knight1), "./pics/fire1.xpm");
+	load_text_walls(cube, &(cube->tex->knight2), "./pics/fire2.xpm");
+	load_text_walls(cube, &(cube->tex->knight3), "./pics/fire3.xpm");
+	load_text_walls(cube, &(cube->tex->knight4), "./pics/fire4.xpm");
+}
+
 void	init_game(t_cube *cube, t_img *img, t_player *player)
 {
 	char	**tmp;
@@ -280,8 +288,11 @@ void	init_game(t_cube *cube, t_img *img, t_player *player)
 	free_map(tmp);
 	walls(cube);
 	door(cube);
+	knight(cube);
 	img->img = mlx_new_image(cube->mlx, WINDOW_W, WINDOW_H);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	cube->img = img;
+	get_all_objects(cube);
+	cube->sorted = sort_objects(cube);
 }

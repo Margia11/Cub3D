@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:09:45 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/11 11:45:18 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 11:46:49 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

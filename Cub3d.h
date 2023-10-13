@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/11 11:54:41 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/13 15:10:18 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@
 # define MOVSPEED 0.10
 # define MOUSESPEED 0.01
 # define PLAYER_R 10
+# define ANISPEED 6
+
+typedef struct s_drawsprite
+{
+	int				drawx[2];
+	int				drawy[2];
+	double			pos[2];
+	double			transf[2];
+	double			inv_det;
+	int				spr_screen_x;
+	int				spr_h;
+	int				spr_w;
+}				t_drawsprite;
 
 typedef struct s_player
 {
@@ -76,20 +89,22 @@ typedef struct s_img {
 	int		endian;
 }	t_img;
 
+typedef struct s_tex {
+	t_img	xpm;
+	int		w;
+	int		h;
+}	t_tex;
+
 typedef struct s_object
 {
 	char			type;
 	int				x;
 	int				y;
 	double			dist;
-	t_img			img;
+	t_tex			*tex;
+	struct s_object	*next;
+	struct s_object	*sort;
 }	t_object;
-
-typedef struct s_tex {
-	t_img	xpm;
-	int		w;
-	int		h;
-}	t_tex;
 
 typedef struct s_textures {
 	t_tex			no;
@@ -97,10 +112,16 @@ typedef struct s_textures {
 	t_tex			we;
 	t_tex			ea;
 	t_tex			door;
+	t_tex			knight1;
+	t_tex			knight2;
+	t_tex			knight3;
+	t_tex			knight4;
+
 }	t_textures;
 
 typedef struct s_cube
 {
+	int				ani;
 	void			*mlx;
 	void			*win;
 	int				map_w;
@@ -121,7 +142,7 @@ typedef struct s_cube
 	t_player		*player;
 	t_ray			*ray;
 	t_object		*objs;
-	t_object		*sort;
+	t_object		*sorted;
 }	t_cube;
 
 
@@ -189,8 +210,20 @@ void	engine(t_cube *cube, t_img *img, t_ray *ray);
 double	absf(double i);
 void	dda(t_cube *cube, t_ray *ray);
 void	draw_ray_text(t_cube *cube, int x, t_ray *ray, t_img *img);
+unsigned long	get_pixel(t_img *img, int x, int y);
 
 //minimap.c
 void	render_minimap(t_cube *cube);
+
+//animation.c
+void	update_animation(t_cube *cube);
+void	draw_knights(t_cube *cube, double *zbuff);
+
+//knight.c
+void		get_all_objects(t_cube *cube);
+t_object	*sort_objects(t_cube *cube);
+t_object	*add_front_object(t_cube *cube, t_object **objs, double dist,
+	t_tex *tex);
+t_object	*add_sorted_object(t_object **sorted, t_object *obj);
 
 #endif
