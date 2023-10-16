@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:52:48 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 12:21:58 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:46:21 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,3 @@ void	render_minimap(t_cube *cube)
 	}
 	draw_player(cube->img, 10, 60, 50);
 }
-

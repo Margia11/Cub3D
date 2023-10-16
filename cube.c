@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 14:19:33 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 12:56:39 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:43:46 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_map(char **mat)
 	int	i;
 
 	i = 0;
-	while(mat[i])
+	while (mat[i])
 	{
 		free(mat[i]);
 		i++;
@@ -78,16 +78,7 @@ int	keypress(int keycode, t_cube *cube)
 	return (0);
 }
 
-void	hook(t_cube *cube)
-{
-	mlx_hook(cube->win, 17, 0, exit_game, cube);
-	mlx_hook(cube->win, 2, 1L << 0, keypress, cube);
-	mlx_hook(cube->win, 6, 0, mouse_filter, cube);
-	mlx_loop_hook(cube->mlx, game_loop, cube);
-	mlx_loop(cube->mlx);
-}
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_cube		cube;
 	t_img		img;

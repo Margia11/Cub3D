@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:32:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 12:21:58 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:41:25 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	checkelements(t_cube *cube)
 	int	y;
 
 	x = -1;
-	while(cube->map[++x] != NULL)
+	while (cube->map[++x] != NULL)
 	{
 		y = -1;
-		while(cube->map[x][++y] != '\0')
+		while (cube->map[x][++y] != '\0')
 		{
-			if(cube->map[x][y] != '1' && cube->map[x][y] != '0'
+			if (cube->map[x][y] != '1' && cube->map[x][y] != '0'
 				&& cube->map[x][y] != ' ' && cube->map[x][y] != 'c'
 				&& cube->map[x][y] != 'N' && cube->map[x][y] != 'S'
 				&& cube->map[x][y] != 'E' && cube->map[x][y] != 'W'
@@ -59,7 +59,7 @@ int	checkposition(t_cube *cube)
 
 int	check_textures(t_cube *cube)
 {
-	if(cube->nopath == NULL || cube->sopath == NULL || cube->wepath == NULL
+	if (cube->nopath == NULL || cube->sopath == NULL || cube->wepath == NULL
 		|| cube->eapath == NULL || cube->f_temp == NULL || cube->c_temp == NULL)
 		return (-1);
 	return (0);

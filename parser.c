@@ -6,7 +6,7 @@
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:35:29 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/06 11:26:14 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:21:58 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,33 @@ void	read_map(char *str, t_cube *cube)
 
 void	parse_texture(char *line, t_cube *cube)
 {
-	if(ft_strncmp(line, "NO", 2) == 0)
-		cube->nopath = ft_strtrim(line + 3, " \n");
-	else if(ft_strncmp(line, "SO", 2) == 0)
-		cube->sopath = ft_strtrim(line + 3, " \n");
-	else if(ft_strncmp(line, "WE", 2) == 0)
-		cube->wepath = ft_strtrim(line + 3, " \n");
-	else if(ft_strncmp(line, "EA", 2) == 0)
-		cube->eapath = ft_strtrim(line + 3, " \n");
-	else if(ft_strncmp(line, "F", 1) == 0)
-		cube->f_temp = ft_strtrim(line + 2, " \n");
-	else if(ft_strncmp(line, "C", 1) == 0)
-		cube->c_temp = ft_strtrim(line + 2, " \n");
+	if (ft_strncmp(line, "NO", 2) == 0)
+		cube->nopath = ft_strtrim(line + 3, "\n");
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		cube->sopath = ft_strtrim(line + 3, "\n");
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		cube->wepath = ft_strtrim(line + 3, "\n");
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		cube->eapath = ft_strtrim(line + 3, "\n");
+	else if (ft_strncmp(line, "F", 1) == 0)
+		cube->f_temp = ft_strtrim(line + 2, "\n");
+	else if (ft_strncmp(line, "C", 1) == 0)
+		cube->c_temp = ft_strtrim(line + 2, "\n");
 }
 
 int	line_texture(char *line)
 {
-	if(ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO", 2) == 0)
 		return (0);
-	else if(ft_strncmp(line, "SO", 2) == 0)
+	else if (ft_strncmp(line, "SO", 2) == 0)
 		return (0);
-	else if(ft_strncmp(line, "WE", 2) == 0)
+	else if (ft_strncmp(line, "WE", 2) == 0)
 		return (0);
-	else if(ft_strncmp(line, "EA", 2) == 0)
+	else if (ft_strncmp(line, "EA", 2) == 0)
 		return (0);
-	else if(ft_strncmp(line, "F", 1) == 0)
+	else if (ft_strncmp(line, "F", 1) == 0)
 		return (0);
-	else if(ft_strncmp(line, "C", 1) == 0)
+	else if (ft_strncmp(line, "C", 1) == 0)
 		return (0);
 	return (1);
 }
@@ -67,12 +67,12 @@ void	fill_map(t_cube *cube)
 	int	j;
 
 	i = 0;
-	while(cube->tmp_map[i])
+	while (cube->tmp_map[i])
 		i++;
 	cube->map = malloc (sizeof(char *) * i);
 	i = 0;
 	j = 0;
-	while(cube->tmp_map[i])
+	while (cube->tmp_map[i])
 	{
 		if (line_texture(cube->tmp_map[i]) == 1)
 		{

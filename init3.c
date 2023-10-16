@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:39:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 14:29:26 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:46:12 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	**full_map(char **map, t_cube *cube)
 	int		j;
 
 	i = 0;
-
 	res = malloc(sizeof(char *) * (cube->map_h + 1));
 	while (map[i])
 	{
@@ -39,12 +38,12 @@ char	**full_map(char **map, t_cube *cube)
 	return (res);
 }
 
-int ft_maxlen(char **map)
+int	ft_maxlen(char **map)
 {
 	int	i;
 	int	j;
 	int	n;
-	int res;
+	int	res;
 
 	i = 0;
 	res = ft_strlen(map[0]);
@@ -70,7 +69,7 @@ char	**copy_map(char **map, int n)
 	int		i;
 
 	i = 0;
-	res = malloc(sizeof(char*) * (n + 1));
+	res = malloc(sizeof(char *) * (n + 1));
 	while (map[i])
 	{
 		res[i] = ft_strdup(map[i]);

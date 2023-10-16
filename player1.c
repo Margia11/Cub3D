@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/16 12:21:58 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:47:30 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-static void set_view_player(t_cube *cube, t_player *player)
+static void	set_view_player(t_cube *cube, t_player *player)
 {
 	int	i;
 	int	j;
@@ -23,7 +23,8 @@ static void set_view_player(t_cube *cube, t_player *player)
 		j = 0;
 		while (cube->map[i][j])
 		{
-			if (cube->map[i][j] == 'W' || cube->map[i][j] == 'N' || cube->map[i][j] == 'S' || cube->map[i][j] == 'E')
+			if (cube->map[i][j] == 'W' || cube->map[i][j] == 'N'
+				|| cube->map[i][j] == 'S' || cube->map[i][j] == 'E')
 			{
 				player->view = cube->map[i][j];
 				player->pos[0] = i + 0.5;
@@ -114,23 +115,4 @@ void	move_left_right(t_cube *cube, double dir)
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
-}
-
-void	move_cam(t_cube *cube, double dir, double speed)
-{
-	double	o_dirx;
-	double	o_cam_dirx;
-	double	rot_dir;
-
-	rot_dir = speed * dir;
-	o_dirx = cube->player->dir[0];
-	cube->player->dir[0] = o_dirx * cos(rot_dir)
-		- cube->player->dir[1] * sin(rot_dir);
-	cube->player->dir[1] = o_dirx * sin(rot_dir)
-		+ cube->player->dir[1] * cos(rot_dir);
-	o_cam_dirx = cube->player->plane[0];
-	cube->player->plane[0] = o_cam_dirx * cos(rot_dir)
-		- cube->player->plane[1] * sin(rot_dir);
-	cube->player->plane[1] = o_cam_dirx * sin(rot_dir)
-		+ cube->player->plane[1] * cos(rot_dir);
 }

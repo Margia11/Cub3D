@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 12:10:07 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 12:57:17 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 15:24:23 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,18 @@ int	ft_matlen(char **mat)
 	return (i);
 }
 
-void	ctrl_ftemp(t_cube *cube)
+void	ctrl_temp(char *str, t_cube *cube)
 {
-	int	i;
 	int	j;
 
 	j = 0;
-	i = 0;
-	while (cube->f_temp[j])
+	while (str[j])
 	{
-		while (cube->f_temp[i] != ',' && cube->f_temp[i])
-			i++;
-		while (j < i)
+		if (!(str[j] > '0' || str[j] < '9') && str[j] != ',')
 		{
-			if (cube->f_temp[j] < '0' || cube->f_temp[j] > '9')
-			{
-				printf("RGB not valid\n");
-				exit_game(cube);
-			}
-			j++;
+			printf("RGB not valid\n");
+			exit_game(cube);
 		}
 		j++;
-		i = j;
 	}
 }

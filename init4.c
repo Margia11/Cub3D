@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:40:15 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 14:29:31 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 15:25:34 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	set_rgb(t_cube *cube)
 {
 	init_rgb(cube);
-	if (cube->F[0] < 0 || cube->F[0] > 255 || cube->F[1] < 0
-		|| cube->F[1] > 255 || cube->F[2] < 0 || cube->F[2] > 255)
+	if (cube->f[0] < 0 || cube->f[0] > 255 || cube->f[1] < 0
+		|| cube->f[1] > 255 || cube->f[2] < 0 || cube->f[2] > 255)
 	{
 		printf("RGB not valid\n");
 		exit_game(cube);
 	}
-	if (cube->C[0] < 0 || cube->C[0] > 255 || cube->C[1] < 0
-		|| cube->C[1] > 255 || cube->C[2] < 0 || cube->C[2] > 255)
+	if (cube->c[0] < 0 || cube->c[0] > 255 || cube->c[1] < 0
+		|| cube->c[1] > 255 || cube->c[2] < 0 || cube->c[2] > 255)
 	{
 		printf("RGB not valid\n");
 		exit_game(cube);
@@ -59,8 +59,8 @@ void	init_rgb_utils(t_cube *cube)
 {
 	ctrl_comma(cube->c_temp, cube);
 	ctrl_comma(cube->f_temp, cube);
-	ctrl_ctemp(cube);
-	ctrl_ftemp(cube);
+	ctrl_temp(cube->c_temp, cube);
+	ctrl_temp(cube->f_temp, cube);
 }
 
 void	full_map_utils(char **map, char **res, int i, int j)
@@ -69,4 +69,11 @@ void	full_map_utils(char **map, char **res, int i, int j)
 		res[i][j] = map[i][j];
 	else
 		res[i][j] = '1';
+}
+
+void	free_util(char *tmp0, char *tmp1, char *tmp2)
+{
+	free(tmp0);
+	free(tmp1);
+	free(tmp2);
 }

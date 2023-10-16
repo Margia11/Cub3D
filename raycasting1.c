@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
+/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:24:57 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/16 12:20:30 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:55:57 by gpecci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_ceiling(t_cube *cube, int x, t_ray *ray, t_img *img)
 	while (v < ray->draw[0])
 	{
 		my_mlx_pixel_put(img, x, v,
-			create_rgb(cube->C[0], cube->C[1], cube->C[2]));
+			create_rgb(cube->c[0], cube->c[1], cube->c[2]));
 		v++;
 	}
 }
@@ -38,7 +38,7 @@ void	draw_flooring(t_cube *cube, int x, t_ray *ray, t_img *img)
 	while (v < WINDOW_H)
 	{
 		my_mlx_pixel_put(img, x, v,
-			create_rgb(cube->F[0], cube->F[1], cube->F[2]));
+			create_rgb(cube->f[0], cube->f[1], cube->f[2]));
 		v++;
 	}
 }
