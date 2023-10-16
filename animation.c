@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:52:30 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/13 15:37:33 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:17:33 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-static void	next_knight(t_cube *cube, t_object *obj)
+static void	next_fire(t_cube *cube, t_object *obj)
 {
 	if (cube->ani == 0)
-		obj->tex = &(cube->tex->knight1);
+		obj->tex = &(cube->tex->fire1);
 	else if (cube->ani == 1)
-		obj->tex = &(cube->tex->knight2);
+		obj->tex = &(cube->tex->fire2);
 	else if (cube->ani == 2)
-		obj->tex = &(cube->tex->knight3);
+		obj->tex = &(cube->tex->fire3);
 	else if (cube->ani == 3)
-		obj->tex = &(cube->tex->knight4);
+		obj->tex = &(cube->tex->fire4);
 }
 
 void	update_animation(t_cube *cube)
@@ -35,7 +35,7 @@ void	update_animation(t_cube *cube)
 		obj = cube->objs;
 		while (obj)
 		{
-			next_knight(cube, obj);
+			next_fire(cube, obj);
 			obj = obj->next;
 		}
 		if (cube->ani == 3)
@@ -95,7 +95,7 @@ static void	draw_spritone(t_drawsprite *spr)
 		spr->drawx[1] = WINDOW_W - 1;
 }
 
-void	draw_knights(t_cube *cube, double *zbuff)
+void	draw_fires(t_cube *cube, double *zbuff)
 {
 	t_object		*obj;
 	t_drawsprite	spr;

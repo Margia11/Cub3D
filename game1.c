@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.c                                             :+:      :+:    :+:   */
+/*   game1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:37:33 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/13 15:05:20 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:15:53 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-double	absf(double i)
+double	abs_value(double i)
 {
 	if (i < 0)
 		return (i * -1.0);
@@ -20,7 +20,7 @@ double	absf(double i)
 		return (i);
 }
 
-static void	init_ray(t_cube *cube, t_ray *ray)
+void	init_ray(t_cube *cube, t_ray *ray)
 {
 	cube->player->cam_side = (2.0 * ((double) ray->ray_id)
 			/ ((double) WINDOW_W)) - 1;
@@ -33,14 +33,14 @@ static void	init_ray(t_cube *cube, t_ray *ray)
 	if (ray->dir[0] == 0)
 		ray->delta_dist[0] = 1e30;
 	else
-		ray->delta_dist[0] = absf(1.0 / ray->dir[0]);
+		ray->delta_dist[0] = abs_value(1.0 / ray->dir[0]);
 	if (ray->dir[1] == 0)
 		ray->delta_dist[1] = 1e30;
 	else
-		ray->delta_dist[1] = absf(1.0 / ray->dir[1]);
+		ray->delta_dist[1] = abs_value(1.0 / ray->dir[1]);
 }
 
-static void	calc_incr(t_cube *cube, t_ray *ray)
+void	calc_incr(t_cube *cube, t_ray *ray)
 {
 	if (ray->dir[0] < 0)
 	{
@@ -68,7 +68,7 @@ static void	calc_incr(t_cube *cube, t_ray *ray)
 	}
 }
 
-static void	init_draw(t_cube *cube, t_ray *ray)
+void	init_draw(t_cube *cube, t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->wall_dist = ray->side_dist[0] - ray->delta_dist[0];
@@ -89,7 +89,7 @@ static void	init_draw(t_cube *cube, t_ray *ray)
 	cube->ray = ray;
 }
 
-static void	init_wall_vars(t_cube *cube, t_ray *ray)
+void	init_wall_vars(t_cube *cube, t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->wallx = cube->player->pos[1] + ray->wall_dist * ray->dir[1];
@@ -104,51 +104,4 @@ static void	init_wall_vars(t_cube *cube, t_ray *ray)
 	ray->step = 1.0 * 64.0 / ((double) ray->wall_height);
 	ray->texpos = (((double) ray->draw[0]) - WINDOW_H / 2
 			+ ray->wall_height / 2) * ray->step;
-}
-
-int	raycast(t_cube *cube, t_img *img, t_ray *ray)
-{
-	int		i;
-	double	zbuffer[WINDOW_W];
-
-	i = 0;
-	while (i < WINDOW_W)
-	{
-		ray->ray_id = i;
-		init_ray(cube, ray);
-		calc_incr(cube, ray);
-		dda(cube, ray);
-		init_draw(cube, ray);
-		init_wall_vars(cube, ray);
-		draw_ray_text(cube, i, ray, img);
-		zbuffer[i] = ray->wall_dist;
-		i++;
-	}
-	draw_knights(cube, zbuffer);
-	return (0);
-}
-
-void	engine(t_cube *cube, t_img *img, t_ray *ray)
-{
-	raycast(cube, img, ray);
-	render_minimap(cube);
-}
-
-int	game_loop(t_cube *cube)
-{
-	t_ray		ray;
-	static int	lock = 0;
-
-	if (lock == 170)
-	{
-		ft_memset(&ray, 0, sizeof(t_ray));
-		engine(cube, cube->img, &ray);
-		mlx_put_image_to_window(cube->mlx, cube->win,
-			cube->img->img, 0, 0);
-		update_animation(cube);
-		lock = 0;
-	}
-	else
-		lock++;
-	return (0);
 }

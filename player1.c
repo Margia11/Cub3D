@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:48:58 by gpecci            #+#    #+#             */
-/*   Updated: 2023/10/13 17:31:02 by gpecci           ###   ########.fr       */
+/*   Updated: 2023/10/16 12:21:58 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	move_up_down(t_cube *cube, double dir)
 		return ;
 	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
 		return ;
-	if (cube->map[(int) npos_x][(int) npos_y] == 'K')
+	if (cube->map[(int) npos_x][(int) npos_y] == 'F')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
@@ -110,7 +110,7 @@ void	move_left_right(t_cube *cube, double dir)
 		return ;
 	if (cube->map[(int) npos_x][(int) npos_y] == 'c')
 		return ;
-	if (cube->map[(int) npos_x][(int) npos_y] == 'K')
+	if (cube->map[(int) npos_x][(int) npos_y] == 'F')
 		return ;
 	cube->player->pos[0] = npos_x;
 	cube->player->pos[1] = npos_y;
@@ -133,66 +133,4 @@ void	move_cam(t_cube *cube, double dir, double speed)
 		- cube->player->plane[1] * sin(rot_dir);
 	cube->player->plane[1] = o_cam_dirx * sin(rot_dir)
 		+ cube->player->plane[1] * cos(rot_dir);
-}
-
-static void	close_door(t_cube *cube)
-{
-	int	x;
-	int	y;
-
-	y = (int) cube->player->pos[0];
-	x = (int) cube->player->pos[1];
-	if (cube->map[(y) + 1][x] == 'o')
-		cube->map[(y) + 1][x] = 'c';
-	else if (cube->map[(y) - 1][x] == 'o')
-		cube->map[(y) - 1][x] = 'c';
-	else if (cube->map[(y)][(x) + 1] == 'o')
-		cube->map[(y)][(x) + 1] = 'c';
-	else if (cube->map[(y)][(x) - 1] == 'o')
-		cube->map[(y)][(x) - 1] = 'c';
-	else if (cube->map[(y) + 1][x] == 'o')
-		cube->map[(y) + 1][x] = 'c';
-	else if (cube->map[(y) - 1][x] == 'o')
-		cube->map[(y) - 1][x] = 'c';
-	else if (cube->map[(y)][(x) + 1] == 'o')
-		cube->map[(y)][(x) + 1] = 'c';
-	else if (cube->map[(y)][(x) - 1] == 'o')
-		cube->map[(y)][(x) - 1] = 'c';
-}
-
-void	open_door(t_cube *cube)
-{
-	int	x;
-	int	y;
-
-	y = (int) cube->player->pos[0];
-	x = (int) cube->player->pos[1];
-	if (cube->map[(y) + 1][x] == 'c')
-		cube->map[(y) + 1][x] = 'o';
-	else if (cube->map[(y) - 1][x] == 'c')
-		cube->map[(y) - 1][x] = 'o';
-	else if (cube->map[(y)][(x) + 1] == 'c')
-		cube->map[(y)][(x) + 1] = 'o';
-	else if (cube->map[(y)][(x) - 1] == 'c')
-		cube->map[(y)][(x) - 1] = 'o';
-	else if (cube->map[(y) + 1][x] == 'c')
-		cube->map[(y) + 1][x] = 'o';
-	else if (cube->map[(y) - 1][x] == 'c')
-		cube->map[(y) - 1][x] = 'o';
-	else if (cube->map[(y)][(x) + 1] == 'c')
-		cube->map[(y)][(x) + 1] = 'o';
-	else if (cube->map[(y)][(x) - 1] == 'c')
-		cube->map[(y)][(x) - 1] = 'o';
-	else
-		close_door(cube);
-}
-
-int	mouse_filter(int x, int y, t_cube *cube)
-{
-	mlx_mouse_get_pos(cube->win, &x, &y);
-	if (x < WINDOW_W / 2 && y > WINDOW_H / 2)
-		move_cam(cube, -1.0, MOUSESPEED / 2);
-	else if (x >= WINDOW_W / 2 && y > WINDOW_H / 2)
-		move_cam(cube, 1.0, MOUSESPEED / 2);
-	return (0);
 }

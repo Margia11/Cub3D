@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   knight.c                                           :+:      :+:    :+:   */
+/*   fire.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -43,11 +43,11 @@ void	get_all_objects(t_cube *cube)
 		x = -1;
 		while (cube->map[y][++x] != '\0')
 		{
-			if (cube->map[y][x] == 'K')
+			if (cube->map[y][x] == 'F')
 			{
 				d = INT16_MAX;
 				objs = add_front_object(cube, &objs, d,
-						&cube->tex->knight1);
+						&cube->tex->fire1);
 				objs->x = y;
 				objs->y = x;
 				objs->type = cube->map[y][x];

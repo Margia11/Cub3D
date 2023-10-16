@@ -1,114 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 14:24:46 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/13 16:01:51 by gpecci           ###   ########.fr       */
+/*   Created: 2023/10/16 11:52:48 by andreamargi       #+#    #+#             */
+/*   Updated: 2023/10/16 12:21:58 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-static void	draw_square(t_img *img, int len, int offset_x, int offset_y)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < len)
-	{
-		y = 0;
-		while (y < len)
-		{
-			my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0DDE3E4);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_yellow_square(t_img *img, int len, int offset_x, int offset_y)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < len)
-	{
-		y = 0;
-		while (y < len)
-		{
-			if (x == 0 || y == 0 || x == len - 1 || y == len - 1)
-				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0000000);
-			else
-				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0FFDB28);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_green_square(t_img *img, int len, int offset_x, int offset_y)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < len)
-	{
-		y = 0;
-		while (y < len)
-		{
-			if (x == 0 || y == 0 || x == len - 1 || y == len - 1)
-				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x0000000);
-			else
-				my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x01ce33d);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_black_square(t_img *img, int len, int offset_x, int offset_y)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < len)
-	{
-		y = 0;
-		while (y < len)
-		{
-			my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x00000000);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_blue_square(t_img *img, int len, int offset_x, int offset_y)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < len)
-	{
-		y = 0;
-		while (y < len)
-		{
-			my_mlx_pixel_put(img, x + offset_x, y + offset_y, 0x00000FF);
-			y++;
-		}
-		x++;
-	}
-}
-
-static void	draw_square_border(t_img *img, int len, int offset_x, int offset_y)
+void	draw_square_border(t_img *img, int len, int offset_x, int offset_y)
 {
 	int	x;
 	int	y;
@@ -129,7 +33,7 @@ static void	draw_square_border(t_img *img, int len, int offset_x, int offset_y)
 	}
 }
 
-static void	draw_minimap(t_cube *cube, int start_x, int x)
+void	draw_minimap(t_cube *cube, int start_x, int x)
 {
 	int	start_y;
 	int	y;
@@ -150,7 +54,7 @@ static void	draw_minimap(t_cube *cube, int start_x, int x)
 			draw_green_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] == 'c')
 			draw_yellow_square(cube->img, 10, pix[0] + 10, pix[1]);
-		else if (cube->map[y][x] == 'K')
+		else if (cube->map[y][x] == 'F')
 			draw_blue_square(cube->img, 10, pix[0] + 10, pix[1]);
 		else if (cube->map[y][x] != '1')
 			draw_square(cube->img, 10, pix[0] + 10, pix[1]);
@@ -158,7 +62,7 @@ static void	draw_minimap(t_cube *cube, int start_x, int x)
 	}
 }
 
-static void	draw_player(t_img *img, int len, int offset_x, int offset_y)
+void	draw_player(t_img *img, int len, int offset_x, int offset_y)
 {
 	int	x;
 	int	y;
@@ -190,3 +94,4 @@ void	render_minimap(t_cube *cube)
 	}
 	draw_player(cube->img, 10, 60, 50);
 }
+

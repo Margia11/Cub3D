@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gpecci <gpecci@student.42.fr>              +#+  +:+       +#+         #
+#    By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 15:58:38 by amargiac          #+#    #+#              #
-#    Updated: 2023/10/13 14:59:43 by gpecci           ###   ########.fr        #
+#    Updated: 2023/10/16 12:19:53 by andreamargi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +21,23 @@ SOURCES_FILES	=	cube.c\
 					controls1.c\
 					controls2.c\
 					controls3.c\
-					init.c\
+					init1.c\
+					init2.c\
+					init3.c\
+					init4.c\
 					get_next_line/get_next_line.c\
 					get_next_line/get_next_line_utils.c\
 					parser.c \
-					player.c \
-					game.c \
-					raycasting.c \
-					minimap.c \
+					player1.c \
+					player2.c \
+					game1.c \
+					game2.c \
+					raycasting1.c \
+					raycasting2.c \
+					minimap1.c \
+					minimap2.c \
 					animation.c \
-					knight.c \
+					fire.c \
 
 HEADER			=	./Cub3d.h
 
