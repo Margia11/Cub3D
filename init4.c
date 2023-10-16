@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:40:15 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 13:01:35 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:29:31 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,12 @@ void	init_rgb_utils(t_cube *cube)
 	ctrl_comma(cube->f_temp, cube);
 	ctrl_ctemp(cube);
 	ctrl_ftemp(cube);
+}
+
+void	full_map_utils(char **map, char **res, int i, int j)
+{
+	if (map[i][j] != ' ')
+		res[i][j] = map[i][j];
+	else
+		res[i][j] = '1';
 }

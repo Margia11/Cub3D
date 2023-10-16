@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:39:57 by andreamargi       #+#    #+#             */
-/*   Updated: 2023/10/16 12:17:33 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:29:26 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,10 @@ char	**full_map(char **map, t_cube *cube)
 	res = malloc(sizeof(char *) * (cube->map_h + 1));
 	while (map[i])
 	{
-		j = 0;
+		j = -1;
 		res[i] = malloc (sizeof(char) * (cube->max + 1));
-		while (map[i][j])
-		{
-			if (map[i][j] != ' ')
-				res[i][j] = map[i][j];
-			else
-				res[i][j] = '1';
-			j++;
-		}
+		while (map[i][++j])
+			full_map_utils(map, res, i, j);
 		while (j < cube->max)
 		{
 			res[i][j] = '1';

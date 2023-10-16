@@ -6,7 +6,7 @@
 /*   By: andreamargiacchi <andreamargiacchi@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:37:01 by amargiac          #+#    #+#             */
-/*   Updated: 2023/10/16 13:01:50 by andreamargi      ###   ########.fr       */
+/*   Updated: 2023/10/16 14:29:49 by andreamargi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void				set_rgb(t_cube *cube);
 void				init_game(t_cube *cube, t_img *img, t_player *player,
 	t_textures *tex);
 void				init_rgb_utils(t_cube *cube);
+void				full_map_utils(char **map, char **res, int i, int j);
 
 //fire.c
 void				get_all_objects(t_cube *cube);
