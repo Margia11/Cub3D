@@ -62,6 +62,9 @@ int	check_textures(t_cube *cube)
 	if (cube->nopath == NULL || cube->sopath == NULL || cube->wepath == NULL
 		|| cube->eapath == NULL || cube->f_temp == NULL || cube->c_temp == NULL)
 		return (-1);
+	if ((check_xpm(cube->nopath) == 0) || (check_xpm(cube->sopath) == 0)
+		|| (check_xpm(cube->eapath) == 0) || (check_xpm(cube->wepath) == 0))
+		return (-1);
 	return (0);
 }
 

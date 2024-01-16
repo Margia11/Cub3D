@@ -44,7 +44,7 @@ HEADER			=	./Cub3d.h
 
 OBJECTS			= 	$(SOURCES_FILES:.c=.o)
 
-NAME			=	cub3d
+NAME			=	cub3D
 
 CC				=	gcc
 
@@ -61,8 +61,8 @@ MLX_FLAGS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 
 all:			$(NAME)
 
-$(NAME):	$(OBJECTS) $(LIBFT)
-				$(CC) $(OBJECTS) -g $(LIBFT) $(MLX_FLAGS) $(SILENT_FLAG) -o $(NAME)
+$(NAME):	$(OBJECTS) $(LIBFT) $(MINILIBX) 
+				$(CC) $(OBJECTS) -g $(LIBFT) $(MINILIBX) $(MLX_FLAGS) $(SILENT_FLAG) -o $(NAME) 
 		@echo "\033[32mCompiled OK!\033[0m"
 
 $(MINILIBX):
@@ -79,6 +79,7 @@ clean:
 fclean:			clean
 					rm -f $(NAME)
 					rm -f $(LIBFT)
+					rm -f $(MINILIBX)
 		@echo "\033[33mfclean OK!\033[0m"
 
 re:				fclean all

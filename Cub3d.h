@@ -63,7 +63,8 @@ typedef struct s_ray
 	double			wall_dist;
 }	t_ray;
 
-typedef struct s_img {
+typedef struct s_img
+{
 	void			*img;
 	char			*addr;
 	int				bits_per_pixel;
@@ -71,7 +72,8 @@ typedef struct s_img {
 	int				endian;
 }	t_img;
 
-typedef struct s_tex {
+typedef struct s_tex
+{
 	t_img			xpm;
 	int				w;
 	int				h;
@@ -88,7 +90,8 @@ typedef struct s_object
 	struct s_object	*sort;
 }	t_object;
 
-typedef struct s_textures {
+typedef struct s_textures
+{
 	t_tex			no;
 	t_tex			so;
 	t_tex			we;
@@ -174,6 +177,7 @@ int					map_ctrl(t_cube *cube);
 
 //cube_utils.c
 void				hook(t_cube *cube);
+int					check_xpm(char *s);
 
 //cube.c
 void				free_map(char **mat);

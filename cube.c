@@ -85,10 +85,10 @@ int	main(int argc, char **argv)
 	t_player	player;
 	t_textures	tex;
 
-	if (argc == 2)
+	if (argc == 2 && argv_check(argv[1]) == 1)
 	{
 		init_map(argv[1], &cube);
-		if (argv_check(argv[1]) == 1 && map_ctrl(&cube) == 0)
+		if (map_ctrl(&cube) == 0)
 		{
 			init_game(&cube, &img, &player, &tex);
 			hook(&cube);

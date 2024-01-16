@@ -20,3 +20,18 @@ void	hook(t_cube *cube)
 	mlx_loop_hook(cube->mlx, game_loop, cube);
 	mlx_loop(cube->mlx);
 }
+
+int	check_xpm(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	i--;
+	if (s[i] == 'm' && s[i - 1] == 'p'
+		&& s[i - 2] == 'x' && s[i - 3] == '.')
+		return (1);
+	else
+		return (0);
+}
